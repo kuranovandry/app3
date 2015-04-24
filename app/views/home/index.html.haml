@@ -1,0 +1,15 @@
+#main.col-xs-12
+  %h1 Listing users
+  %table.table.table-hover
+    %tr.info
+      %th Email
+      %th Date Publised
+      %th{align: "right", colspan: "2"} Options
+    - @users.each do |user|
+      %tr{"data-link" => user_path(user)}
+        %td
+          %span.has-tooltip{"data-toggle" => "tooltip", title: "Created on #{user.created_at.strftime("%m/%e/%Y at %w:%M %p")}, Last modified on #{user.updated_at.strftime("%m/%e/%Y at %w:%M %p")}"}
+            = user.email
+        %td= user.created_at.strftime("%m/%e/%Y at %w:%M %p")
+        %td= button_to 'Edit', edit_user_registration_path, method: :get, class: 'btn btn-info'
+        %td= button_to 'Destroy', user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
