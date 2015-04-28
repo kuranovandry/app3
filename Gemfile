@@ -14,10 +14,12 @@ gem 'devise'
 gem 'devise-bootstrap-views'
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'sprockets-rails'
-gem "haml-rails"
+gem 'haml-rails'
 gem 'pry'
 gem 'activeadmin', '~> 1.0.0.pre1'
 gem 'puma'
+gem 'sidekiq'
+gem 'mailcatcher'
 
 group :development, :test do
   gem 'byebug'
