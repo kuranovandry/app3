@@ -19,6 +19,8 @@ gem 'pry'
 gem 'activeadmin', '~> 1.0.0.pre1'
 gem 'puma'
 gem 'sidekiq'
+gem 'momentjs-rails', '>= 2.8.1'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 gem 'mailcatcher'
 
 group :development, :test do
