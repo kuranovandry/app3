@@ -6,12 +6,18 @@
       .form-group
         = f.label :first_name
         = f.text_field :first_name, autofocus: true, class: "form-control"
+        = error_message(resource, :first_name)
       .form-group
         = f.label :last_name
-        = f.text_field :last_name, autofocus: true, class: "form-control"
+        = f.text_field :last_name, class: "form-control"
+        = error_message(resource, :last_name)
+      .form-group
+        = f.label :date_of_birth
+        = f.date_field :date_of_birth, class: 'form-control datetimepicker'
+        = error_message(resource, :date_of_birth)
       .form-group
         = f.label :email
-        = f.email_field :email, autofocus: true, class: "form-control"
+        = f.email_field :email, class: "form-control"
         = error_message(resource, :email)
       .form-group
         = f.label :password
