@@ -7,5 +7,6 @@ Rails.application.routes.draw do
       get 'welcome'
     end 
   end
+  resources :projects
   root :to => 'users#index'
 end

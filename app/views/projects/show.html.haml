@@ -1,0 +1,12 @@
+.col-md-9
+  %strong Name:
+  = @project.name
+.col-md-9
+  %strong Description:
+  = @project.description
+.col-md-9
+  %strong Start Date:
+  = @project.start_date.strftime("%e/%m/%Y at %w:%M %p")
+.col-md-9
+  %strong End Date:
+  = @project.end_date.strftime("%e/%m/%Y at %w:%M %p")

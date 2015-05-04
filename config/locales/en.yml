@@ -20,4 +20,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  project:
+    successful_create: 'Project was successfully created.'
+    successful_update: 'Project was successfully updated.'
+    successful_destroy: 'Project was successfully destroyed.'
+    error_destroy: 'Something with wrong'

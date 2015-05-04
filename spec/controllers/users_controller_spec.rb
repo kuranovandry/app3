@@ -18,7 +18,7 @@ RSpec.describe UsersController, type: :controller do
 
     context 'logged user'  do
       before :each do
-        login_with(:user)
+        login_with(user)
         get :index
       end
 
@@ -38,7 +38,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'GET #welcome' do
     before :each do
-      login_with(:user)
+      login_with(user)
       get :welcome, id: user.id
     end
 

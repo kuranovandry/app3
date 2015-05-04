@@ -18,6 +18,13 @@
 //= require bootstrap-datetimepicker
 //= require_tree .
 
-$(function () {
-    $('.datetimepicker').datetimepicker();
+ $(function () {
+    $('.datetimepicker_start').datetimepicker();
+    $('.datetimepicker_end').datetimepicker();
+    $(".datetimepicker_start").on("dp.change", function (e) {
+        $('.datetimepicker_end').data("DateTimePicker").minDate(e.date);
+    });
+    $(".datetimepicker_end").on("dp.change", function (e) {
+        $('.datetimepicker_start').data("DateTimePicker").maxDate(e.date);
+    });
 });

@@ -1,0 +1,18 @@
+#main.col-xs-12
+  %h1 Listing Project
+  = link_to 'Create my project', new_project_path, class: 'btn btn-info'
+  %table.table.table-hover
+    %tr.info
+      %th Name
+      %th Start date
+      %th End date
+      %th{align: "right"} Options
+    - @projects.each do |project|
+      %tr{"data-link" => project_path(project)}
+        %td= project.name
+        %td= project.start_date.strftime("%e/%m/%Y at %w:%M %p")
+        %td= project.end_date.strftime("%e/%m/%Y at %w:%M %p")
+        %td
+          - if owner(project)
+            = link_to 'Destroy', project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' 
+            = link_to 'Edit', edit_project_path(project), class: 'btn btn-info'
