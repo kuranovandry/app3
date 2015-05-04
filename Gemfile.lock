@@ -275,6 +275,8 @@ GEM
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
+    travis-lint (2.0.0)
+      json
     turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
@@ -318,6 +320,7 @@ DEPENDENCIES
   sidekiq
   spring
   sprockets-rails
+  travis-lint
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
