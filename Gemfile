@@ -22,6 +22,7 @@ gem 'sidekiq'
 gem 'momentjs-rails', '>= 2.8.1'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 gem 'mailcatcher'
+gem 'travis-lint'
 
 group :development, :test do
   gem 'byebug'
