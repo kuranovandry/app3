@@ -3,8 +3,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   #-----------Validations------------
-  validates :first_name, :last_name, :date_of_birth,  presence: true
+  validates :first_name, :last_name, :date_of_birth, presence: true
 
   #-------------Associations-------------
   has_many :projects
+  has_one :address
+  accepts_nested_attributes_for :address
 end

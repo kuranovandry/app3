@@ -24,4 +24,6 @@ en:
     successful_create: 'Project was successfully created.'
     successful_update: 'Project was successfully updated.'
     successful_destroy: 'Project was successfully destroyed.'
-    error_destroy: 'Something with wrong'
+    error_destroy: 'You can not delete this project'
+  user:
+    successful_update: 'User was successfully updated.'
