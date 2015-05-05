@@ -36,6 +36,27 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+  describe 'PUT #update' do
+    let!(:attr) { { name: 'test_name', address_attributes: { id: address.id, city: 'New'} } }
+    let!(:address) { create(:address, user: user) }
+
+    before :each do
+      login_with(user)
+    end
+
+    it 'updates existing address city' do
+      put :update, id: user.id, user: attr
+      address.reload
+      expect(address.city).to eql 'New'
+    end
+
+    it 'updates user city' do
+      put :update, id: user.id, user: attr
+      user.reload
+      expect(user.address.city).to eql 'New'
+    end
+  end
+
   describe 'GET #welcome' do
     before :each do
       login_with(user)

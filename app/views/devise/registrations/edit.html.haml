@@ -8,6 +8,23 @@
         = f.label :email
         = f.email_field :email, autofocus: true, class: "form-control"
       .form-group
+        = f.label :first_name
+        = f.text_field :first_name, class: "form-control"
+      .form-group
+        = f.label :last_name
+        = f.text_field :last_name, class: "form-control"
+      .form-group
+        = f.fields_for :addresses do |address|
+          .form-group
+            = address.label :city
+            = address.text_field :city, class: 'form-control'
+          .form-group
+            = address.label :postal_code
+            = address.text_field :postal_code, class: 'form-control'
+          .form-group
+            = address.label :address
+            = address.text_field :address, class: 'form-control'
+      .form-group
         = f.label :password
         %i
           (#{t('.leave_blank_if_you_don_t_want_to_change_it', :default => "leave blank if you don't want to change it")})

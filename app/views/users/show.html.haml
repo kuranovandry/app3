@@ -1,0 +1,21 @@
+.panel.panel-default
+  .panel-body
+    .form-group
+      %strong First Name:
+      = @user.first_name
+    .form-group
+      %strong Last Name:
+      = @user.last_name
+    .form-group
+      %strong Email:
+      = @user.email
+    .form-group
+      %strong City:
+      = @user.address.city
+    .form-group
+      %strong Postal Code:
+      = @user.address.postal_code
+    .form-group
+      %strong address:
+      = @user.address.address
+= link_to "All Users", users_path
