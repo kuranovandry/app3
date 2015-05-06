@@ -1,9 +1,10 @@
-/*
- *= require devise_bootstrap_views
- */
+@import 'devise_bootstrap_views';
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import 'bootstrap-datetimepicker';
+@import 'jquery-ui';
+
+
+
 .field_with_errors {
   color: red;
 }
