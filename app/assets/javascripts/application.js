@@ -14,17 +14,9 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
-//= require moment
-//= require bootstrap-datetimepicker
+//= require jquery-ui
 //= require_tree .
 
- $(function () {
-    $('.datetimepicker_start').datetimepicker();
-    $('.datetimepicker_end').datetimepicker();
-    $(".datetimepicker_start").on("dp.change", function (e) {
-        $('.datetimepicker_end').data("DateTimePicker").minDate(e.date);
-    });
-    $(".datetimepicker_end").on("dp.change", function (e) {
-        $('.datetimepicker_start').data("DateTimePicker").maxDate(e.date);
-    });
+$(function() {
+  $('.datepicker').datepicker();
 });
