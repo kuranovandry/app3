@@ -4,13 +4,15 @@
     %tr.info
       %th Email
       %th Date Publised
-      %th{align: "right", colspan: "3"} Options
+      %th{align: "right", colspan: "4"} Options
     - @users.each do |user|
       %tr{"data-link" => user_path(user)}
         %td
           %span.has-tooltip{"data-toggle" => "tooltip", title: "Created on #{user.created_at.strftime("%m/%e/%Y at %w:%M %p")}, Last modified on #{user.updated_at.strftime("%m/%e/%Y at %w:%M %p")}"}
             = user.email
         %td= user.created_at.strftime("%m/%e/%Y at %w:%M %p")
-        %td= link_to 'Edit', edit_user_path(user), class: 'btn btn-info'
-        %td= link_to "Send Email", welcome_user_path(user), class: "btn btn-info"
+        %td= link_to 'Edit', '#', class: 'btn btn-info', 'data-toggle' => "modal", 'data-target' => "#user_edit_modal_#{user.id}"
+        %td= link_to 'Send Email', welcome_user_path(user), class: 'btn btn-info'
         %td= link_to 'Destroy', user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+      = help_modal("user_edit_modal_#{user.id}", 'User edit') do
+        = render partial: 'users/form', locals: { user: user }
