@@ -1,0 +1,19 @@
+#main.col-xs-12
+  %h1 Listing of movies
+  = link_to 'Create my movie', new_movie_path, class: 'btn btn-info'
+  = link_to 'Add new categories', new_category_path, class: 'btn btn-info'
+  %table.table.table-hover
+    %tr.info
+      %th Name
+      %th Release date
+      %th Owner
+      %th{align: "right", colspan: "2"} Options
+    - @movies.each do |movie|
+      %tr{"data-link" => movie_path(movie)}
+        %td= movie.name
+        %td= movie.release_date
+        %td= movie.user.full_name
+        %td
+          - if owner(movie)
+            = link_to 'Destroy', movie_path(movie), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' 
+            = link_to 'Edit', edit_movie_path(movie), class: 'btn btn-info'

@@ -1,0 +1,20 @@
+= form_for(@movie, html: { class: 'form_horizontal'}) do |f|
+  .form-field-group
+    = f.label :name, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :name, class: 'form-control'
+  .form-field-group
+    = f.label :description, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_area :description, class: 'form-control'
+  .form-field-group
+    = f.label :release_date, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.date_field :release_date, class: 'form-control datepicker'
+  .field
+    = f.label :category
+    .col-sm-10
+      = f.select(:category_ids, options_for_select(@categories), {}, {multiple: true})
+  .actions.form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: 'btn btn-info'

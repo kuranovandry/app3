@@ -27,3 +27,7 @@ en:
     error_destroy: 'You can not delete this project'
   user:
     successful_update: 'User was successfully updated.'
+  movie:
+    successful_create: 'Movie was successfully created.'
+    successful_destroy: 'Movie was successfully destroyed.'
+    error_destroy: 'You can not delete this movie'
