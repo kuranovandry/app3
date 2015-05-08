@@ -4,14 +4,9 @@ RSpec.describe ProjectsController, type: :controller do
   let!(:user) { create(:user) }
   let!(:project) { create(:project, user: user)}
 
-  before :each do
-    login_with(user)
-  end
-
   describe 'GET #index' do
     context 'anonymous user' do
       before :each do
-        login_with nil
         get :index
       end
 
@@ -22,6 +17,7 @@ RSpec.describe ProjectsController, type: :controller do
 
     context 'logged user'  do
       before :each do
+        sign_in :user, user
         get :index
       end
 
@@ -40,6 +36,10 @@ RSpec.describe ProjectsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
+    before :each do
+      sign_in :user, user
+    end
+
     let!(:another_project) { create(:project) }
 
     context 'when user is project owner' do
@@ -60,6 +60,10 @@ RSpec.describe ProjectsController, type: :controller do
   end
 
   describe "PUT #update" do
+    before :each do
+      sign_in :user, user
+    end
+
     let!(:another_project) { create(:project) }
     let(:attr) { { name: 'new name' } }
 
@@ -83,6 +87,10 @@ RSpec.describe ProjectsController, type: :controller do
   end
 
   describe "GET #show" do
+    before :each do
+      sign_in :user, user
+    end
+
     before :each do
       get :show, id: project
     end

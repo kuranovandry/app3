@@ -8,4 +8,5 @@ module ApplicationHelper
   def owner(project)
     current_user.id == project.user_id
   end
+
 end

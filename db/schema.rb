@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150504122011) do
+ActiveRecord::Schema.define(version: 20150507113226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,11 +33,11 @@ ActiveRecord::Schema.define(version: 20150504122011) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "city"
-    t.string   "postal_code"
+    t.string   "postal_code", limit: 20
     t.string   "address"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
@@ -60,6 +60,39 @@ ActiveRecord::Schema.define(version: 20150504122011) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "movies_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "categories", ["movies_id"], name: "index_categories_on_movies_id", using: :btree
+  add_index "categories", ["user_id"], name: "index_categories_on_user_id", using: :btree
+
+  create_table "categories_movies", force: :cascade do |t|
+    t.integer  "category_id"
+    t.integer  "movie_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "categories_movies", ["category_id", "movie_id"], name: "index_categories_movies_on_category_id_and_movie_id", unique: true, using: :btree
+
+  create_table "movies", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.date     "release_date"
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "movies", ["category_id"], name: "index_movies_on_category_id", using: :btree
+  add_index "movies", ["user_id"], name: "index_movies_on_user_id", using: :btree
+
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -73,6 +106,8 @@ ActiveRecord::Schema.define(version: 20150504122011) do
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -85,8 +120,6 @@ ActiveRecord::Schema.define(version: 20150504122011) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "first_name"
-    t.string   "last_name"
     t.date     "date_of_birth"
   end
 

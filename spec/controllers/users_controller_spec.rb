@@ -7,7 +7,6 @@ RSpec.describe UsersController, type: :controller do
   describe 'GET #index' do
     context 'anonymous user' do
       before :each do
-        login_with nil
         get :index
       end
 
@@ -18,7 +17,7 @@ RSpec.describe UsersController, type: :controller do
 
     context 'logged user'  do
       before :each do
-        login_with(user)
+        sign_in :user, user
         get :index
       end
 
@@ -41,7 +40,7 @@ RSpec.describe UsersController, type: :controller do
     let!(:address) { create(:address, user: user) }
 
     before :each do
-      login_with(user)
+      sign_in :user, user
     end
 
     it 'updates existing address city' do
@@ -59,7 +58,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'GET #welcome' do
     before :each do
-      login_with(user)
+      sign_in :user, user
       get :welcome, id: user.id
     end
 
