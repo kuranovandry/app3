@@ -1,27 +1,26 @@
-.panel.panel-default
-  .panel-heading
-  .panel-body
-    = form_for(@user, html: { class: 'form_horizontal'}) do |f|
-      .form-group
-        = f.label :email
-        = f.email_field :email, autofocus: true, class: "form-control"
-      .form-group
-        = f.label :first_name
-        = f.text_field :first_name, class: "form-control"
-      .form-group
-        = f.label :last_name
-        = f.text_field :last_name, class: "form-control"
-      .form-group
-        = f.fields_for :address do |address|
-          = address.hidden_field :id, :value => @user.address.id
-          .form-group
-            = address.label :city
-            = address.text_field :city, class: 'form-control'
-          .form-group
-            = address.label :postal_code
-            = address.text_field :postal_code, class: 'form-control'
-          .form-group
-            = address.label :address
-            = address.text_field :address, class: 'form-control'
-        = f.submit t('.update', :default => "Update"), class: "btn btn-primary"
-= link_to "Back", :back
+.modal-body
+  = form_for(user, html: { class: 'form_horizontal'}) do |f|
+    .form-group
+      = f.label :email
+      = f.email_field :email, autofocus: true, class: "form-control"
+    .form-group
+      = f.label :first_name
+      = f.text_field :first_name, class: "form-control"
+    .form-group
+      = f.label :last_name
+      = f.text_field :last_name, class: "form-control"
+    .form-group
+      = f.fields_for :address do |address|
+        = address.hidden_field :id, :value => user.address.id
+        .form-group
+          = address.label :city
+          = address.text_field :city, class: 'form-control'
+        .form-group
+          = address.label :postal_code
+          = address.text_field :postal_code, class: 'form-control'
+        .form-group
+          = address.label :address
+          = address.text_field :address, class: 'form-control'
+    .modal-footer
+      = f.submit t('.update', :default => "Update"), class: "btn btn-primary"
+      = link_to 'Cancel', :back, class: "btn btn-primary"
