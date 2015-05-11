@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   before_action :get_categories, only: %i(edit new)
 
   def index
-    @movies = Movie.includes(:user).order('name').page params[:page]
+    @movies = Movie.includes(:user).order('name').page(params[:page]).decorate
   end
 
   def new

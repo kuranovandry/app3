@@ -24,6 +24,7 @@ gem 'mailcatcher'
 gem 'travis-lint'
 gem 'jquery-ui-rails'
 gem 'kaminari'
+gem 'draper', '~> 1.3'
 
 
 group :development, :test do

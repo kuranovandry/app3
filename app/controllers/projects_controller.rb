@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @projects = Project.order('name').page params[:page]
+    @projects = Project.order('name').page(params[:page]).decorate
   end
 
   def new

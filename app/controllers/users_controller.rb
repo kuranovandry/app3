@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :get_user, except: [:index, :new]
 
   def index
-    @users = User.order('email').page params[:page]
+    @users = User.order('email').page(params[:page])
   end
 
   def update

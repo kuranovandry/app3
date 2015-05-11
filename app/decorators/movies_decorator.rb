@@ -1,0 +1,2 @@
+class MoviesDecorator < ApplicationCollectionDecorator
+end
