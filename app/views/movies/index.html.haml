@@ -14,7 +14,7 @@
         %td= movie.release_date
         %td= movie.user.full_name
         %td
-          - if owner(movie)
+          - if movie.owner(current_user)
             = link_to 'Destroy', movie_path(movie), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' 
             = link_to 'Edit', edit_movie_path(movie), class: 'btn btn-info'
 = paginate @movies

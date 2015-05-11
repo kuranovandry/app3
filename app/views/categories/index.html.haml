@@ -9,6 +9,5 @@
       %tr{"data-link" => category_path(category)}
         %td= category.name
         %td
-          - if owner(category)
-            = link_to 'Destroy', category_path(category), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+          = link_to 'Destroy', category_path(category), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 = paginate @categories

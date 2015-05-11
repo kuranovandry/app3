@@ -1,0 +1,2 @@
+class ProjectsDecorator < ApplicationCollectionDecorator
+end

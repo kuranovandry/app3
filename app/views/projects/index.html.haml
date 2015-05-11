@@ -13,7 +13,7 @@
         %td= project.start_date.strftime("%e/%m/%Y at %w:%M %p")
         %td= project.end_date.strftime("%e/%m/%Y at %w:%M %p")
         %td
-          - if owner(project)
+          - if project.owner(current_user)
             = link_to 'Destroy', project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' 
             = link_to 'Edit', edit_project_path(project), class: 'btn btn-info'
 = paginate @projects

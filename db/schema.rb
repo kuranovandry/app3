@@ -82,15 +82,13 @@ ActiveRecord::Schema.define(version: 20150507113226) do
 
   create_table "movies", force: :cascade do |t|
     t.string   "name"
-    t.string   "description"
+    t.text     "description"
     t.date     "release_date"
     t.integer  "user_id"
-    t.integer  "category_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
 
-  add_index "movies", ["category_id"], name: "index_movies_on_category_id", using: :btree
   add_index "movies", ["user_id"], name: "index_movies_on_user_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
