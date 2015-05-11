@@ -23,6 +23,7 @@ gem 'momentjs-rails', '>= 2.8.1'
 gem 'mailcatcher'
 gem 'travis-lint'
 gem 'jquery-ui-rails'
+gem 'kaminari'
 
 
 group :development, :test do

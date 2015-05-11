@@ -17,3 +17,4 @@
           - if owner(movie)
             = link_to 'Destroy', movie_path(movie), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' 
             = link_to 'Edit', edit_movie_path(movie), class: 'btn btn-info'
+= paginate @movies
