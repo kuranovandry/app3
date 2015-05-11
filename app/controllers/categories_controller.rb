@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :get_category, except: %i(index create new)
 
   def index
-    @categories = Category.all
+    @categories = Category.order('name').page params[:page]
   end
 
   def new

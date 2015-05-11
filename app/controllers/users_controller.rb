@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :get_user, except: [:index, :new]
 
   def index
-    @users = User.all
+    @users = User.order('email').page params[:page]
   end
 
   def update
@@ -20,8 +20,6 @@ class UsersController < ApplicationController
     UserMailer.delay.welcome(@user)
     redirect_to users_path
   end
-
-
 
   private
 
