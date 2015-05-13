@@ -25,7 +25,9 @@ gem 'travis-lint'
 gem 'jquery-ui-rails'
 gem 'kaminari'
 gem 'draper', '~> 1.3'
-
+gem 'omniauth-linkedin-oauth2'
+gem 'omniauth-facebook'
+gem 'dotenv-rails'
 
 group :development, :test do
   # gem 'byebug'

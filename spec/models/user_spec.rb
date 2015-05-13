@@ -13,7 +13,6 @@ describe User do
 
     it { is_expected.to validate_presence_of(:first_name) }
     it { is_expected.to validate_presence_of(:last_name) }
-    it { is_expected.to validate_presence_of(:date_of_birth) }
 
     it 'has valid factory' do
       expect(build(:user)).to be_valid
