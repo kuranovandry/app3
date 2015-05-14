@@ -67,6 +67,10 @@ GEM
     builder (3.2.2)
     celluloid (0.16.0)
       timers (~> 4.0.0)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.7)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -159,6 +163,8 @@ GEM
       skinny (~> 0.2.3)
       sqlite3 (~> 1.3)
       thin (~> 1.5.0)
+    masonry-rails (0.2.4)
+      railties
     method_source (0.8.2)
     mime-types (2.4.3)
     mini_portile (0.6.2)
@@ -188,6 +194,11 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
+    paperclip (4.2.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     pg (0.18.1)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
@@ -340,9 +351,11 @@ DEPENDENCIES
   jquery-ui-rails
   kaminari
   mailcatcher
+  masonry-rails
   momentjs-rails (>= 2.8.1)
   omniauth-facebook
   omniauth-linkedin-oauth2
+  paperclip (~> 4.2)
   pg
   pry
   puma
