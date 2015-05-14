@@ -1,26 +1,13 @@
 .modal-body
-  = form_for(user, html: { class: 'form_horizontal'}) do |f|
+  = simple_form_for user, class: 'form-horizontal' do |u|
     .form-group
-      = f.label :email
-      = f.email_field :email, autofocus: true, class: "form-control"
-    .form-group
-      = f.label :first_name
-      = f.text_field :first_name, class: "form-control"
-    .form-group
-      = f.label :last_name
-      = f.text_field :last_name, class: "form-control"
-    .form-group
-      = f.fields_for :address do |address|
-        = address.hidden_field :id, :value => user.address.id
-        .form-group
-          = address.label :city
-          = address.text_field :city, class: 'form-control'
-        .form-group
-          = address.label :postal_code
-          = address.text_field :postal_code, class: 'form-control'
-        .form-group
-          = address.label :address
-          = address.text_field :address, class: 'form-control'
-    .modal-footer
-      = f.submit t('.update', :default => "Update"), class: "btn btn-primary"
-      = link_to 'Cancel', :back, class: "btn btn-primary"
+      = u.input :email, as: :email, lable: 'Email', autofocus: true, class: 'form-control'
+      = u.input :first_name, label: 'First name', class: 'form-control'
+      = u.input :last_name, label: 'Last name', class: 'form-control'
+      = u.simple_fields_for :address do |address_form|
+        = address_form.input :id, as: :hidden, value: user.address.id
+        = address_form.input :city, label: 'City', class: 'form-control'
+        = address_form.input :postal_code, label: 'Postal code', class: 'form-control'
+        = address_form.input :address, label: 'Address', class: 'form-control'
+      = u.submit t('.update', default: 'Update'), class: 'btn btn-primary'
+      = link_to 'Cancel', :back, class: 'btn btn-primary'
