@@ -15,6 +15,9 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require jquery-ui
+//= require jquery.fileupload
+//= require jquery.iframe-transport
+//= require masonry/jquery.masonry
 //= require_tree .
 
 $(function() {
@@ -38,3 +41,4 @@ $(function() {
     window.close()
   }
 });
+

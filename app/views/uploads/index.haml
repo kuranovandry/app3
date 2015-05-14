@@ -1,0 +1,8 @@
+#main.col-xs-12
+  %h1 Gallery
+  %input#fileupload{ 'data-url' => movie_uploads_path(params[:movie_id]), multiple: 'multiple', name: 'file', type: 'file'}
+  .file_uploader
+  #container.row
+    = render @uploads
+  %div.pagination
+    = paginate @uploads

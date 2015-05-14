@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     end
   end
   resources :projects
-  resources :movies
+  resources :movies do
+    resources :uploads
+  end
   resources :categories
   root :to => 'users#index'
 end
