@@ -2,13 +2,9 @@
   .panel-heading
     %h4= t('.sign_in', :default => "Sign in")
   .panel-body
-    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: "form" }) do |f|
-      .form-group
-        = f.label :email
-        = f.email_field :email, autofocus: true, class: "form-control"
-      .form-group
-        = f.label :password
-        = f.password_field :password, autocomplete: "off", class: "form-control"
+    = simple_form_for resource, as: resource_name, url: session_path(resource_name), html: { role: "form" } do |f|
+      = f.input :email, as: :email, lable: 'Email', autofocus: true, class: "form-control"
+      = f.input :password, as: :password, lable: 'Password', autocomplete: "off", class: "form-control"
       - if devise_mapping.rememberable?
         .checkbox
           %label

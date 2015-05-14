@@ -1,8 +1,3 @@
-= form_for(@category, html: { class: 'form_horizontal'}) do |f|
-  .form-field-group
-    = f.label :name, class: 'col-sm-2 control-label'
-    .col-sm-10
-      = f.text_field :name, class: 'form-control'
-  .actions.form-group
-    .col-sm-offset-2.col-sm-10
-      = f.submit class: 'btn btn-info'
+= simple_form_for @category, class: 'form_horizontal' do |category|
+  = category.input :name, class: 'form-control'
+  = category.submit class: 'btn btn-info'

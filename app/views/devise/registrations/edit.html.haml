@@ -3,39 +3,21 @@
   .panel-heading
     %h4= t('.title', :resource => resource_class.model_name.human , :default => 'Edit #{resource_name.to_s.humanize}')
   .panel-body
-    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+    = simple_form_for resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put } do |f|
       .form-group
-        = f.label :email
-        = f.email_field :email, autofocus: true, class: "form-control"
-      .form-group
-        = f.label :first_name
-        = f.text_field :first_name, class: "form-control"
-      .form-group
-        = f.label :last_name
-        = f.text_field :last_name, class: "form-control"
-      .form-group
-        = f.fields_for :addresses do |address|
-          .form-group
-            = address.label :city
-            = address.text_field :city, class: 'form-control'
-          .form-group
-            = address.label :postal_code
-            = address.text_field :postal_code, class: 'form-control'
-          .form-group
-            = address.label :address
-            = address.text_field :address, class: 'form-control'
-      .form-group
-        = f.label :password
+        = f.input :email, as: :email, lable: 'Email', autofocus: true, class: "form-control"
+        = f.input :first_name, lable: 'First Name', class: "form-control"
+        = f.input :last_name, lable: 'Last Name', class: "form-control"
+        = f.simple_fields_for :addresses do |address_form|
+          = address_form.input :city, lable: 'City', class: 'form-control'
+          = address_form.input :postal_code, lable: 'Postal Code', class: 'form-control'
+          = address_form.input :address, lable: 'Address', class: 'form-control'
         %i
           (#{t('.leave_blank_if_you_don_t_want_to_change_it', :default => "leave blank if you don't want to change it")})
         %br/
-        = f.password_field :password, :autocomplete => "off", class: "form-control"
-      .form-group
-        = f.label :password_confirmation
+        = f.input :password, as: :password, lable: 'Password', :autocomplete => "off", class: "form-control"
         %br/
-        = f.password_field :password_confirmation, class: "form-control"
-      .form-group
-        = f.label :current_password
+        = f.input :password_confirmation, as: :password, lable: 'Password confirmation', class: "form-control"
         %i
           (#{t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes')})
         = f.password_field :current_password, class: "form-control"
