@@ -1,14 +1,13 @@
 %nav.navbar.navbar-default{role: "navigation"}
   .container
     .navbar-header
-      %a.navbar-brand{href: users_path }
-        %b Users
-      %a.navbar-brand{href: projects_path }
-        %b Projects
-      %a.navbar-brand{href: new_project_path }
-        %b New Project 
-      %a.navbar-brand{href: movies_path }
-        %b Movies
+      - if user_signed_in?
+        %a.navbar-brand{href: users_path }
+          %b Users
+        %a.navbar-brand{href: projects_path }
+          %b Projects
+        %a.navbar-brand{href: movies_path }
+          %b Movies
     %ul.nav.navbar-nav
     %ul.nav.navbar-nav.navbar-right
       %li.dropdown

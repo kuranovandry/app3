@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get 'welcome'
+      get 'csv_mail'
     end
   end
   resources :projects

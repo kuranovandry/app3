@@ -4,7 +4,14 @@ class MoviesController < ApplicationController
   before_action :get_categories, only: %i(edit new)
 
   def index
-    @movies = Movie.includes(:user).order('name').page(params[:page]).decorate
+    movies = Movie.includes(:user).order('name').page(params[:page])
+    respond_to do |format|
+      format.html do
+        @movies = movies.decorate
+        render :index
+      end
+      format.csv { render text: movies.to_csv_generator }
+    end
   end
 
   def new
