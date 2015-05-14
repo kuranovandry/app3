@@ -12,15 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap-sprockets
 //= require jquery-ui
 //= require jquery.fileupload
 //= require jquery.iframe-transport
 //= require masonry/jquery.masonry
+//= require tinymce
 //= require_tree .
 
 $(function() {
+
+  tinyMCE.init({
+    selector: 'textarea.tinymce'
+  });
+
   $('.datepicker').datepicker();
 
   function popupCenter(url, width, height, name) {
