@@ -21,6 +21,12 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def csv_mail
+    @csv = User.to_csv_generator
+    UserMailer.delay.csv_mail(@user, @csv)
+    redirect_to users_path
+  end
+
   private
 
   def user_params

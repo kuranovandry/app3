@@ -7,5 +7,13 @@ class Movie < ActiveRecord::Base
 
   paginates_per 5
 
-
+  def self.to_csv_generator
+    movies_fields = %w(id name description)
+    CSV.generate do |csv|
+      csv << movies_fields
+      all.each do |movie|
+        csv << movie.attributes.values_at(*movies_fields)
+      end
+    end
+  end
 end

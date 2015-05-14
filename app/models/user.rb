@@ -26,4 +26,14 @@ class User < ActiveRecord::Base
     User.where(email: auth.info.email).first ||
     User.create(first_name: auth.info.first_name, last_name: auth.info.last_name, provider: auth.provider, uid: auth.uid, email: auth.info.email, password: Devise.friendly_token[0,20])
   end
+
+  def self.to_csv_generator
+    user_fields = %w(id email first_name last_name)
+    CSV.generate do |csv|
+      csv << user_fields
+      all.each do |user|
+        csv << user.attributes.values_at(*user_fields)
+      end
+    end
+  end
 end
