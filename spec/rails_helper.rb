@@ -4,6 +4,12 @@ require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'shoulda/matchers'
+require 'capybara/rails'
+require 'capybara/rspec'
+require 'database_cleaner'
+
+Capybara.default_driver = :webkit
+Capybara.javascript_driver = :webkit
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -17,7 +23,7 @@ RSpec.configure do |config|
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   config.infer_spec_type_from_file_location!
   config.include FactoryGirl::Syntax::Methods

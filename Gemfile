@@ -33,6 +33,12 @@ gem 'simple_form'
 
 gem 'paperclip', '~> 4.2'
 gem 'masonry-rails'
+#https://github.com/jnicklas/capybara
+gem 'capybara'
+#https://github.com/thoughtbot/capybara-webkit
+gem 'capybara-webkit'
+#https://github.com/DatabaseCleaner/database_cleaner
+gem 'database_cleaner'
 
 group :development, :test do
   # gem 'byebug'
