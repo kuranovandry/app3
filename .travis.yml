@@ -4,4 +4,4 @@ rvm:
 before_script:
   - cp config/database.yml.travis config/database.yml
   - bundle exec rake db:create db:migrate
-script: xvfb-run bundle exec rspec spec/features && xvfb-run bundle exec rspec spec
+script: xvfb-run bundle exec rspec spec

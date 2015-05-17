@@ -5,7 +5,7 @@
     = simple_form_for resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" } do |f|
       = f.input :first_name, autofocus: true, class: "form-control"
       = f.input :last_name, class: "form-control"
-      = f.input :date_of_birth, as: :date, class: 'form-control datepicker'
+      = f.input :date_of_birth, as: :string, class: 'form-control datepicker'
       = f.input :email, as: :email, class: "form-control"
       = f.input :password, as: :password, class: "form-control"
       = f.input :password_confirmation, as: :password, class: "form-control"
