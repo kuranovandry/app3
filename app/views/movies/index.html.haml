@@ -5,9 +5,9 @@
       %th Name
       %th Release date
       %th Owner
-      %th{align: "right", colspan: "2"} Options
+      %th{align: 'right', colspan: '2'} Options
     - @movies.each do |movie|
-      %tr{"data-link" => movie_path(movie)}
+      %tr{'data-link' => movie_path(movie), id: "movie-#{movie.id}"}
         %td= movie.name
         %td= movie.release_date
         %td= movie.user.full_name
