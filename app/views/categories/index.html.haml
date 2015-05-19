@@ -1,12 +1,12 @@
 #main.col-xs-12
-  %h1 Listing category
+  %h1 Categories list
   = link_to 'Create my category', new_category_path, class: 'btn btn-info'
   %table.table.table-hover
     %tr.info
       %th Category
       %th{align: "right"} Options
     - @categories.each do |category|
-      %tr{"data-link" => category_path(category)}
+      %tr{"data-link" => category_path(category) , id: "category-#{category.id}"}
         %td= category.name
         %td
           = link_to 'Destroy', category_path(category), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'

@@ -18,6 +18,5 @@
             = link_to 'Edit', edit_movie_path(movie), class: 'btn btn-info'
 .form-group
   = link_to 'Create my movie', new_movie_path, class: 'btn btn-info'
-  = link_to 'Add new categories', new_category_path, class: 'btn btn-info'
   = link_to 'CSV', movies_path(format: 'csv'), class: 'btn btn-info'
 = paginate @movies
