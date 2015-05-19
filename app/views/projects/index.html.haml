@@ -8,7 +8,7 @@
       %th End date
       %th{align: "right"} Options
     - @projects.each do |project|
-      %tr{"data-link" => project_path(project)}
+      %tr{"data-link" => project_path(project), id: "project-#{project.id}"}
         %td= project.name
         %td= project.start_date.strftime("%e/%m/%Y at %w:%M %p")
         %td= project.end_date.strftime("%e/%m/%Y at %w:%M %p")
