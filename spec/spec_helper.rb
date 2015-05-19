@@ -1,9 +1,11 @@
 require_relative 'support/controller_helpers'
+require_relative 'support/request_helpers'
 require 'devise'
 require 'database_cleaner'
 
 RSpec.configure do |config|
   config.include ControllerHelpers, type: :controller
+  config.include RequestHelpers
   Warden.test_mode!
 
   config.after do
