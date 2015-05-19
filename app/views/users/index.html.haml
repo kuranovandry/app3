@@ -1,12 +1,19 @@
+.row
+  = form_tag '', method: :get, class: 'activity-form' do
+    = select_tag :filter,  options_for_select(User::FILTER, User::FILTER[0]), class: 'col-md-2 form-control'
+    = submit_tag 'Filter', class: 'btn btn-info'
+
 #main.col-xs-12
   %h1 Listing users
   %table.table.table-hover
     %tr.info
+      %th Name
       %th Email
       %th Date Publised
       %th{align: "right", colspan: "4"} Options
     - @users.each do |user|
-      %tr{"data-link" => user_path(user)}
+      %tr{"data-link" => user_path(user), id: "user-#{user.id}"}
+        %td= user.full_name
         %td
           %span.has-tooltip{"data-toggle" => "tooltip", title: "Created on #{user.created_at.strftime("%m/%e/%Y at %w:%M %p")}, Last modified on #{user.updated_at.strftime("%m/%e/%Y at %w:%M %p")}"}
             = user.email
@@ -14,7 +21,6 @@
         %td= link_to 'Edit', '#', class: 'btn btn-info', 'data-toggle' => "modal", 'data-target' => "#user_edit_modal_#{user.id}"
         %td= link_to 'Send Email', welcome_user_path(user), class: 'btn btn-info'
         %td= link_to 'Send CSV to Email', csv_mail_user_path(user), class: 'btn btn-info'
-        %td= link_to 'Destroy', user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
       = help_modal("user_edit_modal_#{user.id}", 'User edit') do
         = render partial: 'users/form', locals: { user: user }
 = paginate @users

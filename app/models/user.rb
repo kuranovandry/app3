@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   after_create -> { build_address }
   paginates_per 5
 
+  FILTER = [['All', ''], ['With projects', 'with_project'], ['Without projects', 'without_project'] ]
+
   #-----------Validations------------
   validates :first_name, :last_name, presence: true
 
@@ -15,12 +17,19 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :address
 
+  scope :with_project, -> { joins(:projects).distinct }
+  scope :without_project, -> { joins("LEFT JOIN projects on (users.id = projects.user_id)").where("projects.user_id IS NULL") }
+
   #-----------Instance methods------------
   def full_name
     "#{first_name} #{last_name}"
   end
 
   #-----------Class methods------------
+  def self.filter(method)
+    method.present? && respond_to?(:method) ? send(method) : all
+  end
+
   def self.connections(auth, signed_in_resource=nil)
     User.where(provider: auth.provider, uid: auth.uid).first ||
     User.where(email: auth.info.email).first ||
