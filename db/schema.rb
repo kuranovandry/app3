@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150512132543) do
+ActiveRecord::Schema.define(version: 20150519125420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,17 @@ ActiveRecord::Schema.define(version: 20150512132543) do
   end
 
   add_index "categories_movies", ["category_id", "movie_id"], name: "index_categories_movies_on_category_id_and_movie_id", unique: true, using: :btree
+
+  create_table "daily_statistics", force: :cascade do |t|
+    t.string   "date"
+    t.integer  "statistic"
+    t.integer  "sum"
+    t.integer  "movie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "daily_statistics", ["movie_id"], name: "index_daily_statistics_on_movie_id", using: :btree
 
   create_table "movies", force: :cascade do |t|
     t.string   "name"
