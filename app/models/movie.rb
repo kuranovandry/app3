@@ -5,6 +5,7 @@ class Movie < ActiveRecord::Base
   has_many :categories, through: :categories_movies
   has_many :uploads, dependent: :destroy
   has_many :daily_statistics, dependent: :destroy
+  has_many :monthly_statistics, dependent: :destroy
 
   paginates_per 5
 
