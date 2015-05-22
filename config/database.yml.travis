@@ -2,3 +2,8 @@ test:
   adapter: postgresql
   database: travis_ci_test
   username: postgres
+
+db2_test:
+  adapter: postgresql
+  database: travis_ci_test_db2
+  username: postgres

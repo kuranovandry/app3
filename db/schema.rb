@@ -81,14 +81,14 @@ ActiveRecord::Schema.define(version: 20150519125420) do
   add_index "categories_movies", ["category_id", "movie_id"], name: "index_categories_movies_on_category_id_and_movie_id", unique: true, using: :btree
 
   create_table "daily_statistics", force: :cascade do |t|
-    t.string   "date"
-    t.integer  "statistic"
-    t.integer  "sum"
+    t.date     "date"
+    t.decimal  "sum"
     t.integer  "movie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "daily_statistics", ["movie_id", "date"], name: "index_daily_statistics_on_movie_id_and_date", unique: true, using: :btree
   add_index "daily_statistics", ["movie_id"], name: "index_daily_statistics_on_movie_id", using: :btree
 
   create_table "movies", force: :cascade do |t|
