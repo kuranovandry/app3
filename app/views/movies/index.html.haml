@@ -1,3 +1,5 @@
+= link_to image_tag('feed-icon-28x28.png'), movies_url(format: "atom")
+- content_for :head, auto_discovery_link_tag(:atom, movies_url(format: "atom"))
 #main.col-xs-12
   %h1 Listing of movies
   %table.table.table-hover
@@ -20,3 +22,4 @@
   = link_to 'Create my movie', new_movie_path, class: 'btn btn-info'
   = link_to 'CSV', movies_path(format: 'csv'), class: 'btn btn-info'
 = paginate @movies
+
