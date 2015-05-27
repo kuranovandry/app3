@@ -18,6 +18,8 @@
             = link_to 'Destroy', movie_path(movie), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
             = link_to 'Gallery', movie_uploads_path(movie), class: 'btn btn-danger'
             = link_to 'Edit', edit_movie_path(movie), class: 'btn btn-info'
+            = link_to 'Monthly statistic', movie_monthly_statistics_path(movie), class: 'btn btn-info'
+            = link_to 'Daily statistic', movie_daily_statistics_path(movie), class: 'btn btn-info'
 .form-group
   = link_to 'Create my movie', new_movie_path, class: 'btn btn-info'
   = link_to 'CSV', movies_path(format: 'csv'), class: 'btn btn-info'

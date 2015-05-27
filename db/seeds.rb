@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Movie.find_each do |movie|
+  time = Time.current
+  10.times{|i| movie.daily_statistics.create(sum: rand(1000..23000), date: time.ago(i.days)) }
+end

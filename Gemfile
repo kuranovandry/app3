@@ -29,7 +29,8 @@ gem 'omniauth-linkedin-oauth2'
 gem 'omniauth-facebook'
 gem 'dotenv-rails'
 gem 'simple_form'
-
+gem 'whenever'
+gem 'chartkick'
 gem 'paperclip', '~> 4.2'
 gem 'masonry-rails'
 #https://github.com/jnicklas/capybara
