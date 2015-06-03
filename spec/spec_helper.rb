@@ -20,7 +20,6 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-
   config.before(:suite) do
     DatabaseCleaner[:active_record, connection: :test].clean_with(:truncation)
     DatabaseCleaner[:active_record, connection: :db2_test].clean_with(:truncation)
@@ -37,7 +36,6 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner[:active_record, connection: :test].start
-    DatabaseCleaner[:active_record, connection: :db2_test].start
   end
 
   config.after(:each) do
