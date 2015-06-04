@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
   has_many :movies, dependent: :destroy
   has_one :address, dependent: :destroy
 
+  has_many :debit_transactions, foreign_key: :debitor_id, class_name: 'Transaction', dependent: :destroy
+  has_many :credit_transactions, foreign_key: :creditor_id, class_name: 'Transaction', dependent: :destroy
+  has_many :admin_transactions, foreign_key: :user_id, class_name: 'Transaction', dependent: :destroy
   accepts_nested_attributes_for :address
 
   scope :with_project, -> { joins(:projects).distinct }
@@ -25,6 +28,25 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def balance
+    debit_transactions.sum(:amount) - credit_transactions.sum(:amount)
+  end
+
+  def update_balance(value)
+    update_attribute(:current_amount, value)
+  end
+
+  def payable?
+    balance > 0
+  end
+
+  def transfer_money(obtainer_id, amount)
+    credit_transactions.create(debitor_id: obtainer_id, amount: amount)
+  end
+
+  def add_money(debitor_id, amount, memo)
+    admin_transactions.create(debitor_id: debitor_id, amount: amount, memo: memo)
+  end
   #-----------Class methods------------
   def self.filter(method)
     method.present? && respond_to?(:method) ? send(method) : all
