@@ -1,0 +1,76 @@
+%body
+  %section#about.about
+    .container
+      .row
+        .col-lg-12.text-center
+          %h2 SUPER PROJECT
+  %section#services.services.bg-primary
+    .container
+      .row.text-center
+        .col-lg-10.col-lg-offset-1
+          %h2 Our Services
+          %hr.small/
+          .row
+            .col-md-4.col-sm-6
+              .service-item
+                %span.fa-stack.fa-4x
+                  %i.fa.fa-circle.fa-stack-2x
+                  %i.fa.fa-user-plus.fa-stack-1x.text-primary
+                %h4
+                  %strong Users
+                %p You can view all users.
+                = link_to 'All users', users_path, class: 'btn btn-light'
+            .col-md-4.col-sm-6
+              .service-item
+                %span.fa-stack.fa-4x
+                  %i.fa.fa-circle.fa-stack-2x
+                  %i.fa.fa-building.fa-stack-1x.text-primary
+                %h4
+                  %strong Project
+                %p Create your own project.
+                = link_to 'All project', projects_path, class: 'btn btn-light'
+            .col-md-4.col-sm-6
+              .service-item
+                %span.fa-stack.fa-4x
+                  %i.fa.fa-circle.fa-stack-2x
+                  %i.fa.fa-simplybuilt.fa-stack-1x.text-primary
+                %h4
+                  %strong Movie
+                %p Add movie.
+                = link_to 'All movies', movies_path, class: 'btn btn-light'
+  %aside.callout
+    .text-vertical-center
+      %h1 Projects
+  %section#portfolio.portfolio
+    .container
+    .row
+      .col-lg-10.col-lg-offset-1.text-center
+        .row
+          - @projects.each do |project|
+            .col-md-6
+              .portfolio-item
+                = link_to (project.name), project
+        = link_to 'View More Projects', projects_path, class: 'btn btn-dark'
+  %aside.home_movie
+    .text-vertical-center
+      %h1 Movies
+  %section#portfolio.portfolio
+    .container
+      .row
+        .col-lg-10.col-lg-offset-1.text-center
+          #movies_gallery.transitions-enabled
+            - @movies.each do |movie|
+              .box.panel.panel-default{id: "movie-#{movie.id}"}
+                = link_to (image_tag movie.image, class: 'Edit'), movie
+                %h2= movie.name
+                %p.user
+                  Creator:
+                  = movie.user.full_name
+          = link_to 'View More Movies', movies_path, class: 'btn btn-dark'
+  / Map
+  -#%section#contact.map
+  -#  %iframe{:frameborder => "0", :height => "100%", :marginheight => "0", :marginwidth => "0", :scrolling => "no", :src => "https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&aq=0&oq=twitter&sll=28.659344,-81.187888&sspn=0.128789,0.264187&ie=UTF8&hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&t=m&z=15&iwloc=A&output=embed", :width => "100%"}
+  -#  %br/
+  -#  %small
+  -#    %a{:href => "https://maps.google.com/maps?f=q&source=embed&hl=en&geocode=&q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&aq=0&oq=twitter&sll=28.659344,-81.187888&sspn=0.128789,0.264187&ie=UTF8&hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&t=m&z=15&iwloc=A"}
+  / Footer

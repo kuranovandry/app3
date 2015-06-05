@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!
+
   before_action :get_category, except: %i(index create new)
 
   def index

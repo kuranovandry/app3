@@ -1,7 +1,12 @@
+/*
+*= require 'masonry/transitions'
+*/
 @import 'devise_bootstrap_views';
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import 'jquery-ui';
+@import "font-awesome";
+@import "stylish-portfolio";
 
 // Masonry import
 @import 'masonry/basic';
@@ -10,9 +15,69 @@
 @import 'masonry/gutters';
 @import 'masonry/infinitescroll';
 @import 'masonry/right-to-left';
-@import 'masonry/transitions';
 
+#movies_gallery {
+  margin: 0 auto;
+  width: 100%;
+  .box {
+    margin: 10px;
+    width: 350px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+    border-radius: 7px;
+    text-align: center;
 
-.field_with_errors {
-  color: red;
+    position:absolute;
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    h2 {
+      position: absolute;
+      top: 200px;
+      left: 0;
+      width: 100%;
+      font: bold 24px/45px Helvetica, Sans-Serif;
+      color: red;
+      font-size: 30px;
+    }
+    .user {
+      font-size: 12px;
+      border-top: 1px solid #EAEAEA;
+      padding: 15px;
+      margin: 0;
+    }
+  }
+}
+#movie_show {
+  .panel-heading {
+    padding: 0;
+  }
+  .movie_image {
+    img {
+      max-width: 100%;
+      width: 100%;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+  .panel-body {
+    padding: 35px;
+    h1 {
+      margin: 0 0 10px 0;
+    }
+    .description {
+      color: #868686;
+      line-height: 1.75;
+      margin: 0;
+    }
+  }
+  .panel-footer {
+    padding: 20px 35px;
+    p {
+      margin: 0;
+    }
+    .user {
+      padding-top: 8px;
+    }
+  }
 }

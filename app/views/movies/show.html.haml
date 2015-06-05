@@ -1,0 +1,19 @@
+#movie_show.row
+  .col-md-8.col-md-offset-2
+    .panel.panel-default
+      .panel-heading.movie_image
+        = image_tag @movie.image.url
+      .panel-body
+        %h1= @movie.name
+        %p.description= @movie.description.html_safe
+      .panel-footer
+        .row
+          .col-md-6
+            %p.user
+              Submitted by
+              = @movie.user.full_name
+          .col-md-6.text-right
+            .btn-group
+              = link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-info'
+              = link_to 'Gallery', movie_uploads_path(@movie), class: 'btn btn-danger'
+              = link_to 'Destroy', movie_path(@movie), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'

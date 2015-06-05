@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528064646) do
+
+ActiveRecord::Schema.define(version: 20150604062844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,13 +92,31 @@ ActiveRecord::Schema.define(version: 20150528064646) do
   add_index "daily_statistics", ["movie_id", "date"], name: "index_daily_statistics_on_movie_id_and_date", unique: true, using: :btree
   add_index "daily_statistics", ["movie_id"], name: "index_daily_statistics_on_movie_id", using: :btree
 
+  create_table "locations", force: :cascade do |t|
+    t.string   "country"
+    t.string   "city"
+    t.string   "address"
+    t.integer  "zip_code"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.integer  "movie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "locations", ["movie_id"], name: "index_locations_on_movie_id", using: :btree
+
   create_table "movies", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.date     "release_date"
     t.integer  "user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "movies", ["user_id"], name: "index_movies_on_user_id", using: :btree

@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :authenticate_user!
+
   before_action :get_movie, except: %i(index create new)
   before_action :get_categories, only: %i(edit new)
 
@@ -53,7 +53,7 @@ class MoviesController < ApplicationController
   private
 
   def movie_params
-    params.require(:movie).permit(:name, :description, :release_date, category_ids: [])
+    params.require(:movie).permit(:name, :description, :release_date, :image, category_ids: [])
   end
 
   def get_movie

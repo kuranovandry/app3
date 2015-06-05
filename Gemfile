@@ -42,6 +42,8 @@ gem 'database_cleaner'
 
 #https://github.com/spohlenz/tinymce-rails
 gem 'tinymce-rails'
+gem 'font-awesome-rails'
+
 group :development, :test do
   # gem 'byebug'
   gem 'shoulda-matchers'
