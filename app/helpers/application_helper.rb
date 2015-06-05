@@ -4,8 +4,12 @@ module ApplicationHelper
   end
 
   def errors_output
-    flash.each do |name, msg|
-      content_tag :div, msg, class: "alert alert-#{name}"
+    content_tag :div, class: 'flash-messages' do
+      flash.map do |name, msg|
+        content_tag :div, class: "alert alert-dismissable alert-#{name}" do
+          content_tag(:span, '&times;'.html_safe, class: :close, 'data-dismiss' => 'alert') + msg
+        end
+      end.join().html_safe
     end
   end
 end
