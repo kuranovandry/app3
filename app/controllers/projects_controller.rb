@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
+
   before_action :get_project, except: [:index, :show, :create, :new]
-  before_action :authenticate_user!
 
   def index
     @projects = Project.order('name').page(params[:page]).decorate

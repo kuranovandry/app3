@@ -1,27 +1,15 @@
-= link_to image_tag('feed-icon-28x28.png'), movies_url(format: "atom")
-- content_for :head, auto_discovery_link_tag(:atom, movies_url(format: "atom"))
 #main.col-xs-12
-  %h1 Listing of movies
-  %table.table.table-hover
-    %tr.info
-      %th Name
-      %th Release date
-      %th Owner
-      %th{align: 'right', colspan: '2'} Options
+  .form-group
+    %h1 Listing of movies
+    = link_to 'Create my movie', new_movie_path, class: 'btn btn-info'
+    = link_to 'CSV', movies_path(format: 'csv'), class: 'btn btn-info'
+    = link_to image_tag('feed-icon-28x28.png'), movies_url(format: 'atom')
+  #movies_gallery.transitions-enabled
     - @movies.each do |movie|
-      %tr{'data-link' => movie_path(movie), id: "movie-#{movie.id}"}
-        %td= movie.name
-        %td= movie.release_date
-        %td= movie.user.full_name
-        %td
-          - if movie.owner(current_user)
-            = link_to 'Destroy', movie_path(movie), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-            = link_to 'Gallery', movie_uploads_path(movie), class: 'btn btn-danger'
-            = link_to 'Edit', edit_movie_path(movie), class: 'btn btn-info'
-            = link_to 'Monthly statistic', movie_monthly_statistics_path(movie), class: 'btn btn-info'
-            = link_to 'Daily statistic', movie_daily_statistics_path(movie), class: 'btn btn-info'
-.form-group
-  = link_to 'Create my movie', new_movie_path, class: 'btn btn-info'
-  = link_to 'CSV', movies_path(format: 'csv'), class: 'btn btn-info'
+      .box.panel.panel-default{id: "movie-#{movie.id}"}
+        = link_to (image_tag movie.image, class: 'Edit'), movie
+        %h2= movie.name
+        %p.user
+          Creator:
+          = movie.user.full_name
 = paginate @movies
-

@@ -21,36 +21,33 @@ feature 'Movies page', js: true, type: :feature do
 
   # When I visit movies page
   before :each do
-    visit movies_path()
+    visit movie_path(movies.first.id)
   end
 
   scenario 'Movies displaying' do
+    # When I visit movies page
+    visit movies_path()
+
     expect(page).to have_content 'Listing of movies'
     # Then I should see 2 movies on the movies page
-    within('.table') do
+    within('#movies_gallery') do
       expect(page).to have_content(movies.first.name)
       expect(page).to have_content(movies.last.name)
     end
   end
 
   scenario 'Movie deleting' do
-
     # When I click on the destroy link for the first movie
     with_confirm do
-      within("tr#movie-#{movies.first.id}") do
-        click_link 'Destroy'
-      end
+      click_link 'Destroy'
     end
     # Then I should not see this movie on movies page
     expect(page).not_to have_content(movies.first.name)
   end
 
   scenario 'Movie updating' do
-
     # When I click on the edit link for the first movie
-    within("tr#movie-#{movies.first.id}") do
-      click_link 'Edit'
-    end
+    click_link 'Edit'
 
     # And I fill all fields
     within("#edit_movie_#{movies.first.id}") do
@@ -64,6 +61,8 @@ feature 'Movies page', js: true, type: :feature do
   end
 
   scenario 'Movie creating' do
+    # When I visit movies page
+    visit movies_path()
 
     # When I click on the create my movie link for the first movie
     click_link 'Create my movie'
@@ -80,9 +79,7 @@ feature 'Movies page', js: true, type: :feature do
 
   scenario "Displaying movie's image" do
     # When I click on the gallery link for the first movie
-    within("tr#movie-#{movies.first.id}") do
-      click_link 'Gallery'
-    end
+    click_link 'Gallery'
 
     # Then I should see attached photo
     expect(page).to have_selector("img[src$='#{photo.file.url}']")
@@ -90,9 +87,7 @@ feature 'Movies page', js: true, type: :feature do
 
   scenario "Movie's Photo attaching" do
     # When I click on the gallery link for the first movie
-    within("tr#movie-#{movies.first.id}") do
-      click_link 'Gallery'
-    end
+    click_link 'Gallery'
 
     # And I choose photo
     page.find('#fileupload').set(test_image_path)

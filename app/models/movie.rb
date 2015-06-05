@@ -7,7 +7,12 @@ class Movie < ActiveRecord::Base
   has_many :daily_statistics, dependent: :destroy
   has_many :monthly_statistics, dependent: :destroy
 
-  paginates_per 5
+  has_attached_file :image, styles: { medium: '300x300>', thumb: '100x100>' }, default_url: 'missing.jpg'
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+
+  validates :description, :name, presence: true
+
+  paginates_per 10
 
   def self.to_csv_generator
     movies_fields = %w(id name description)

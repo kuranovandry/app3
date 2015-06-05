@@ -18,6 +18,8 @@
 //= require jquery.iframe-transport
 //= require masonry/jquery.masonry
 //= require tinymce
+//= require jsapi
+//= require chartkick
 //= require_tree .
 
 $(function() {

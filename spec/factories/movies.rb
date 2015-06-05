@@ -3,6 +3,7 @@ FactoryGirl.define do
     name { Faker::Company.name }
     description { Faker::Lorem.sentence(3) }
     release_date { Faker::Date.backward(14) }
+    image { Faker::Avatar.image }
     user
   end
 end

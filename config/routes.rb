@@ -15,5 +15,5 @@ Rails.application.routes.draw do
     resources :monthly_statistics, only: :index
   end
   resources :categories
-  root :to => 'users#index'
+  root to: 'home#index'
 end
