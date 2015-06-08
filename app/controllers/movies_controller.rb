@@ -22,6 +22,16 @@ class MoviesController < ApplicationController
     @movie = Movie.new
   end
 
+  def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = BuyPdf.new(@movie)
+        send_data pdf.render, type: 'application/pdf', disposition: 'inline'
+      end
+    end
+  end
+
   def create
     @movie = current_user.movies.create(movie_params)
     if @movie.save

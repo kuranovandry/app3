@@ -43,6 +43,8 @@ gem 'database_cleaner'
 #https://github.com/spohlenz/tinymce-rails
 gem 'tinymce-rails'
 gem 'font-awesome-rails'
+gem 'prawn'
+gem 'prawn-table'
 
 group :development, :test do
   # gem 'byebug'
