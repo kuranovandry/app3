@@ -19,3 +19,19 @@
       %strong address:
       = @user.address.address
 = link_to 'Go to All Users', users_path,  class: 'btn btn-primary'
+.tickets.row.col-xs-12
+  %h1 Tickets
+  - @order_items.each do |order_item|
+    .panel.panel-default
+      .panel-body
+        %p
+          Movie name:
+          = order_item.ticket.name
+
+        %p
+          Price:
+          = number_to_currency order_item.ticket.price
+        %p
+          Place number:
+          = order_item.ticket.place_number
+        .pull-right= link_to 'Print ticket', ticket_path(order_item.ticket, format: 'pdf'), class: 'btn btn-info'

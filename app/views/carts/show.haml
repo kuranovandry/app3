@@ -1,0 +1,20 @@
+#main.col-xs-12
+  %h1 Cart
+  %table.table.table-hover
+    %tr.info
+      %th Item
+      %th Quantity
+      %th Price for one item
+      %th Sum
+    - @cart.cart_items.each do |item|
+      %tr{ id: "item-#{item.id}" }
+        %td= item.ticket.movie.name
+        %td= item.quantity
+        %td= item.ticket.price
+        %td
+          = calculate_sum(item.quantity, item.ticket.price)
+          = link_to 'Destroy', cart_item_path(item), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+    %tr
+      %td
+        = link_to 'Buy', orders_path, method: :post
+

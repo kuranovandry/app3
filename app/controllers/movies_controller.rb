@@ -23,8 +23,9 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @movie = current_user.movies.create(movie_params)
+    @movie = current_user.movies.build(movie_params)
     if @movie.save
+      Ticket.create_tickets_for_movie(@movie)
       flash[:success] = t('movie.successful_create')
       redirect_to movies_path
     else
@@ -50,6 +51,16 @@ class MoviesController < ApplicationController
     end
   end
 
+  def add_to_the_cart
+    if current_user.cart
+      add_cart_items_to_cart
+    else
+      current_user.create_cart
+      add_cart_items_to_cart
+    end
+    flash[:success] = t('cart_item.successful_create')
+    redirect_to movies_path
+  end
   private
 
   def movie_params
@@ -68,5 +79,11 @@ class MoviesController < ApplicationController
     @categories = Category.pluck(:name, :id)
   end
 
-
+  def add_cart_items_to_cart
+    cart = current_user.cart
+    movie_id = params[:id]
+    ticket = Ticket.available_tickets(movie_id).sample
+    quantity = params[:quantity] || 1
+    cart.cart_items.create(ticket: ticket, quantity: quantity)
+  end
 end

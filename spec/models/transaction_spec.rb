@@ -6,6 +6,7 @@ RSpec.describe Transaction, type: :model do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to belong_to(:debitor) }
     it { is_expected.to belong_to(:creditor) }
+    it { is_expected.to have_one(:order_item) }
   end
 
   describe 'validation' do
