@@ -3,6 +3,7 @@ class Transaction < ActiveRecord::Base
   belongs_to :creditor, foreign_key: :creditor_id, class_name: 'User'
   belongs_to :debitor, foreign_key: :debitor_id, class_name: 'User'
   belongs_to :user
+  has_one :order_item
   #---------------------Callbacks-------------------------
   after_create { creditor.update_balance(creditor.balance) if creditor}
   after_create { debitor.update_balance(debitor.balance) }

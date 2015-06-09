@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
   has_many :debit_transactions, foreign_key: :debitor_id, class_name: 'Transaction', dependent: :destroy
   has_many :credit_transactions, foreign_key: :creditor_id, class_name: 'Transaction', dependent: :destroy
   has_many :admin_transactions, foreign_key: :user_id, class_name: 'Transaction', dependent: :destroy
+  has_many :owner_tickets, foreign_key: :owner_id, class_name: 'Ticket', dependent: :destroy
+  has_many :orders
+  has_one :cart, dependent: :destroy
+  has_many :order_items, through: :orders
   accepts_nested_attributes_for :address
 
   scope :with_project, -> { joins(:projects).distinct }
@@ -46,6 +50,10 @@ class User < ActiveRecord::Base
 
   def add_money(debitor_id, amount, memo)
     admin_transactions.create(debitor_id: debitor_id, amount: amount, memo: memo)
+  end
+
+  def can_afford?
+    balance - cart.cart_items.joins(:ticket).sum(:price) >= 0
   end
   #-----------Class methods------------
   def self.filter(method)

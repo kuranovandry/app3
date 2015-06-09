@@ -9,6 +9,9 @@ describe User do
     it { is_expected.to have_many(:credit_transactions) }
     it { is_expected.to have_many(:admin_transactions) }
     it { is_expected.to have_one(:address) }
+    it { is_expected.to have_many(:owner_tickets) }
+    it { is_expected.to have_many(:orders) }
+    it { is_expected.to have_one(:cart) }
   end
 
   describe 'validation' do

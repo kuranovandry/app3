@@ -12,4 +12,7 @@ module ApplicationHelper
       end.join().html_safe
     end
   end
+  def calculate_sum(quantity, price)
+    number_to_currency(quantity*price)
+  end
 end
