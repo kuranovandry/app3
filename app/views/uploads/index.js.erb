@@ -1,4 +1,4 @@
-$("#container").append("<%= j render(@uploads) %>");
+$("#container").append("<%= j render 'uploads' %>");
 <%if @uploads.last_page? %>
   $('div.pagination').html('<%= j paginate @uploads %>');
 <% end %>
