@@ -31,6 +31,9 @@ gem 'dotenv-rails'
 gem 'simple_form'
 gem 'whenever'
 gem 'chartkick'
+gem 'geocoder'
+gem 'gmaps4rails'
+
 gem 'paperclip', '~> 4.2'
 gem 'masonry-rails'
 #https://github.com/jnicklas/capybara

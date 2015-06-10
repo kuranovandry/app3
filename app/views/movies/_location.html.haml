@@ -1,0 +1,6 @@
+%fieldset
+  = f.input :country, as: :string, label: 'Country', class: 'form-control'
+  = f.input :city, label: 'City', class: 'form-control'
+  = f.input :address, label: 'Address', class: 'form-control'
+  = f.input :_destroy, as: :hidden
+  = link_to 'remove', '#', class: 'remove_fields'

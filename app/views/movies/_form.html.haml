@@ -1,7 +1,15 @@
-= simple_form_for @movie, class: 'form_horizontal' do |form|
-  = form.input :image, label: 'Poster'
-  = form.input :name, class: 'form-control'
-  = form.input :description, input_html: {class: 'form-control tinymce'}
-  = form.input :release_date, as: :string, class: 'form-control datepicker'
-  = form.select(:category_ids, options_for_select(@categories), {}, {multiple: true})
-  = form.submit class: 'btn btn-info'
+#main-container.container
+  = simple_form_for @movie, class: 'form_horizontal' do |form|
+    = form.input :image, label: 'Poster'
+    = form.input :name, class: 'form-control'
+    = form.input :description, input_html: {class: 'form-control tinymce'}
+    = form.input :release_date, as: :string, class: 'form-control datepicker'
+    = form.select(:category_ids, options_for_select(@categories), {}, {multiple: true}) unless @categories.blank?
+    = form.simple_fields_for :locations do |locations_form|
+      = render 'location', f: locations_form
+    = link_to_add_fields 'Add Location', form, :locations
+    = form.submit class: 'btn btn-info'
+:javascript
+  $(function(){
+    App3.init({movieEdit: true, datePicker: true});
+  });

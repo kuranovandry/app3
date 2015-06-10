@@ -12,4 +12,7 @@
         %p.user
           Creator:
           = movie.user.full_name
-= paginate @movies
+:javascript
+  $(function(){
+    App3.init({moviesImages: true});
+  });

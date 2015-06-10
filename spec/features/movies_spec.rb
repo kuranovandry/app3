@@ -99,7 +99,6 @@ end
 
 def fulfill_movies_form
   fill_in 'Name', with: movie.name
-
   within_frame('movie_description_ifr') do
     editor = page.find_by_id('tinymce')
     editor.set movie.description

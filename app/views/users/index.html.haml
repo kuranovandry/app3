@@ -1,9 +1,7 @@
-.row
+#main.col-xs-12
   = form_tag '', method: :get, class: 'activity-form' do
     = select_tag :filter,  options_for_select(User::FILTER, User::FILTER[0]), class: 'col-md-2 form-control'
     = submit_tag 'Filter', class: 'btn btn-info'
-
-#main.col-xs-12
   %h1 Listing users
   %table.table.table-hover
     %tr.info
@@ -24,3 +22,7 @@
       = help_modal("user_edit_modal_#{user.id}", 'User edit') do
         = render partial: 'users/form', locals: { user: user }
 = paginate @users
+:javascript
+  $(function(){
+    App3.init({registrationPopup: true});
+  });
