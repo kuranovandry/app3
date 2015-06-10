@@ -11,3 +11,7 @@
         = address_form.input :address, label: 'Address', class: 'form-control'
       = u.submit t('.update', default: 'Update'), class: 'btn btn-primary'
       = link_to 'Cancel', :back, class: 'btn btn-primary'
+:javascript
+  $(function(){
+    App3.init({datePicker: true});
+  });

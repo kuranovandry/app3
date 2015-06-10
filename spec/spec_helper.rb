@@ -42,4 +42,9 @@ RSpec.configure do |config|
     DatabaseCleaner[:active_record, connection: :test].clean
     DatabaseCleaner[:active_record, connection: :db2_test].clean
   end
+
+  config.before :each, js: true do
+    page.driver.block_unknown_urls
+  end
+
 end

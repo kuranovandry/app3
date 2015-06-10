@@ -1,7 +1,11 @@
-= simple_form_for @project, class: 'form_horizontal' do |form|
-  = form.input :name, lable: 'Project name', class: 'form-control'
-  = form.input :description, as: :text, lable: 'Project description', class: 'form-control'
-  = form.input :start_date, as: :string, lable: 'Project stard date', class: 'form-control datepicker'
-  = form.input :end_date, as: :string, lable: 'Project end date',  class: 'form-control datepicker'
-  = form.submit class: 'btn btn-info'
-   
+#main-container.container
+  = simple_form_for @project, class: 'form_horizontal' do |form|
+    = form.input :name, lable: 'Project name', class: 'form-control'
+    = form.input :description, as: :text, lable: 'Project description', class: 'form-control'
+    = form.input :start_date, as: :string, lable: 'Project stard date', class: 'form-control datepicker'
+    = form.input :end_date, as: :string, lable: 'Project end date',  class: 'form-control datepicker'
+    = form.submit class: 'btn btn-info'
+:javascript
+  $(function(){
+    App3.init({datePicker: true});
+  });

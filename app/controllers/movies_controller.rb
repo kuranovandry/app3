@@ -1,6 +1,7 @@
 class MoviesController < ApplicationController
 
   before_action :get_movie, except: %i(index create new)
+  before_action :authenticate_user!
   before_action :get_categories, only: %i(edit new)
 
   def index
@@ -20,6 +21,15 @@ class MoviesController < ApplicationController
 
   def new
     @movie = Movie.new
+    @movie.locations.build
+  end
+
+  def show
+    @movie = Movie.find params[:id]
+    @markers = Gmaps4rails.build_markers(@movie.locations) do |location, marker|
+      marker.lat location.latitude
+      marker.lng location.longitude
+    end
   end
 
   def create
@@ -53,7 +63,7 @@ class MoviesController < ApplicationController
   private
 
   def movie_params
-    params.require(:movie).permit(:name, :description, :release_date, :image, category_ids: [])
+    params.require(:movie).permit(:name, :description, :release_date, :image, category_ids: [], locations_attributes: [ :id, :country, :city, :address, :zip_code, :latitude, :longitude ])
   end
 
   def get_movie
