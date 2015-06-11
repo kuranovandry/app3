@@ -5,7 +5,7 @@ class DailyStatistic < ActiveRecord::Base
   #----------Class methods------------
   def self.monthly_statistic(date = Time.current.to_date)
     select('daily_statistics.movie_id, SUM(daily_statistics.sum) AS month_sum')
-        .where(date: date.beginning_of_month..date.end_of_month)
-        .group(:movie_id)
+      .where(date: date.beginning_of_month..date.end_of_month)
+      .group(:movie_id)
   end
 end

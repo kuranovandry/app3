@@ -1,5 +1,4 @@
 class Movie < ActiveRecord::Base
-
   belongs_to :user
   has_many :categories_movies, dependent: :destroy
   has_many :categories, through: :categories_movies
@@ -11,7 +10,7 @@ class Movie < ActiveRecord::Base
   accepts_nested_attributes_for :locations
 
   has_attached_file :image, styles: { medium: '300x300>', thumb: '100x100>' }, default_url: 'missing.jpg'
-  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :image, content_type: %r{/\Aimage\/.*\Z/}
 
   validates :description, :name, presence: true
 

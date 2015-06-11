@@ -9,7 +9,7 @@ feature 'Categories page', js: true, type: :feature do
   given(:category) { build :category }
   # When I visit the categories page
   before :each do
-    visit categories_path()
+    visit categories_path
   end
 
   scenario 'Categories displaying' do
@@ -33,7 +33,6 @@ feature 'Categories page', js: true, type: :feature do
   end
 
   scenario 'Category adding' do
-
     # When I click on the create my category link
     click_link 'Create my category'
 

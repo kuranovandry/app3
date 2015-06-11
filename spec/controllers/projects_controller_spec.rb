@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ProjectsController, type: :controller do
   let!(:user) { create(:user) }
-  let!(:project) { create(:project, user: user)}
+  let!(:project) { create(:project, user: user) }
 
   describe 'GET #index' do
     context 'anonymous user' do
@@ -35,7 +35,7 @@ RSpec.describe ProjectsController, type: :controller do
     end
   end
 
-  describe "DELETE #destroy" do
+  describe 'DELETE #destroy' do
     before :each do
       sign_in :user, user
     end
@@ -44,22 +44,22 @@ RSpec.describe ProjectsController, type: :controller do
 
     context 'when user is project owner' do
       it 'removes project' do
-        expect {
+        expect do
           delete :destroy, id: project.id
-        }.to change { Project.count }.by(-1)
+        end.to change { Project.count }.by(-1)
       end
     end
 
     context 'when user is not project owner' do
       it 'does not remove project' do
-        expect {
+        expect do
           delete :destroy, id: another_project.id
-        }.to raise_exception(ActiveRecord::RecordNotFound)
+        end.to raise_exception(ActiveRecord::RecordNotFound)
       end
     end
   end
 
-  describe "PUT #update" do
+  describe 'PUT #update' do
     before :each do
       sign_in :user, user
     end
@@ -67,8 +67,8 @@ RSpec.describe ProjectsController, type: :controller do
     let!(:another_project) { create(:project) }
     let(:attr) { { name: 'new name' } }
 
-    context  'when user is project owner' do
-      before (:each) do
+    context 'when user is project owner' do
+      before :each do
         put :update, id: project.id, project: attr
         project.reload
       end
@@ -79,14 +79,14 @@ RSpec.describe ProjectsController, type: :controller do
 
     context 'when user is not project owner' do
       it 'does not update project' do
-        expect {
+        expect do
           put :update, id: another_project.id
-        }.to raise_exception(ActiveRecord::RecordNotFound)
+        end.to raise_exception(ActiveRecord::RecordNotFound)
       end
     end
   end
 
-  describe "GET #show" do
+  describe 'GET #show' do
     before :each do
       sign_in :user, user
     end
@@ -95,11 +95,11 @@ RSpec.describe ProjectsController, type: :controller do
       get :show, id: project
     end
 
-    it "assigns project" do
+    it 'assigns project' do
       expect(assigns(:project)).to eq(project)
     end
-    
-    it "renders the #show view" do
+
+    it 'renders the #show view' do
       expect(response).to render_template(:show)
     end
   end

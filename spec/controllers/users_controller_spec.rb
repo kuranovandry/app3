@@ -36,7 +36,7 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let!(:attr) { { name: 'test_name', address_attributes: { id: address.id, city: 'New'} } }
+    let!(:attr) { { name: 'test_name', address_attributes: { id: address.id, city: 'New' } } }
     let!(:address) { create(:address, user: user) }
 
     before :each do

@@ -1,6 +1,5 @@
 class CategoriesController < ApplicationController
-
-  before_action :get_category, except: %i(index create new)
+  before_action :prepare_category, except: %i(index create new)
 
   def index
     @categories = Category.order('name').page params[:page]
@@ -9,7 +8,7 @@ class CategoriesController < ApplicationController
   def new
     @category = Category.new
   end
-  
+
   def create
     @category = Category.create(category_params)
     if @category.save
@@ -35,7 +34,7 @@ class CategoriesController < ApplicationController
     params.require(:category).permit(:name)
   end
 
-  def get_category
+  def prepare_category
     @category = Category.find(params[:id])
   end
 end

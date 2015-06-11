@@ -11,7 +11,6 @@ feature 'the users page', js: true, type: :feature do
   end
 
   context 'the filtering process', js: true, type: :feature do
-
     scenario 'user sees all users in index page' do
       within('.table') do
         expect(page).to have_content(user.email)
@@ -43,7 +42,6 @@ feature 'the users page', js: true, type: :feature do
   end
 
   context 'the user editing' do
-
     scenario 'user sees a message about successful update when everything is all right' do
       within "tr#user-#{user.id}" do
         click_link('Edit')

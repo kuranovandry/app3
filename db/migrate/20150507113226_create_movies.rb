@@ -3,7 +3,7 @@ class CreateMovies < ActiveRecord::Migration
     create_table :movies do |t|
       t.string :name
       t.text :description
-      t.date   :release_date
+      t.date :release_date
       t.belongs_to :user, index: true
 
       t.timestamps null: false

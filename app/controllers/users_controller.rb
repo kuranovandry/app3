@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-
-  before_action :get_user, except: [:index, :new]
+  before_action :prepare_user, except: [:index, :new]
 
   def index
     @users = User.filter(params[:filter]).order('id').page(params[:page])
@@ -29,11 +28,13 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :date_of_birth, address_attributes: [ :id, :address, :city, :postal_code ])
+    params.require(:user).permit(:first_name,
+                                 :last_name,
+                                 :date_of_birth,
+                                 address_attributes: %i(id address city postal_code))
   end
 
-  def get_user
+  def prepare_user
     @user = User.find(params[:id])
   end
-
 end

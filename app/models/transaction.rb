@@ -4,7 +4,7 @@ class Transaction < ActiveRecord::Base
   belongs_to :debitor, foreign_key: :debitor_id, class_name: 'User'
   belongs_to :user
   #---------------------Callbacks-------------------------
-  after_create { creditor.update_balance(creditor.balance) if creditor}
+  after_create { creditor.update_balance(creditor.balance) if creditor }
   after_create { debitor.update_balance(debitor.balance) }
   #---------------------Validations-----------------------
   validates_presence_of :debitor_id, :amount
@@ -13,6 +13,7 @@ class Transaction < ActiveRecord::Base
   validate :can_afford?, :not_equal?, unless: 'creditor_id.nil?'
 
   #---------------------Instance methods------------------
+
   private
 
   def can_afford?

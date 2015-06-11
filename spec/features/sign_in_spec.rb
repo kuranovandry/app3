@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'the signin process', js: true, type: :feature do
-  let!(:user) { create(:user, password: '12345678')}
+  let!(:user) { create(:user, password: '12345678') }
 
   it 'signs me in' do
     visit new_user_session_path

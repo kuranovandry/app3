@@ -8,7 +8,7 @@ feature 'Movies page', js: true, type: :feature do
   given!(:movies) { create_list(:movie, 2, user: authed_user) }
 
   # Given there is a 1 specific movie
-  given!(:movie){ build :movie }
+  given!(:movie) { build :movie }
 
   # Given there is a 1 photo for specific movie
   given!(:photo) { create :upload, movie: movies.first }
@@ -26,7 +26,7 @@ feature 'Movies page', js: true, type: :feature do
 
   scenario 'Movies displaying' do
     # When I visit movies page
-    visit movies_path()
+    visit movies_path
 
     expect(page).to have_content 'Listing of movies'
     # Then I should see 2 movies on the movies page
@@ -62,7 +62,7 @@ feature 'Movies page', js: true, type: :feature do
 
   scenario 'Movie creating' do
     # When I visit movies page
-    visit movies_path()
+    visit movies_path
 
     # When I click on the create my movie link for the first movie
     click_link 'Create my movie'
@@ -74,7 +74,7 @@ feature 'Movies page', js: true, type: :feature do
 
     # Then I should see created movie on the movies page
     click_button 'Create Movie'
-    expect(page).to have_content( movie.name )
+    expect(page).to have_content(movie.name)
   end
 
   scenario "Displaying movie's image" do

@@ -3,9 +3,7 @@ require 'brakeman'
 require 'bundler/audit/cli'
 task :brakeman do
   report = Brakeman.run(app_path: '.', print_report: true)
-  if report.filtered_warnings.present?
-    abort
-  end
+  abort if report.filtered_warnings.present?
 end
 
 namespace :bundle do
@@ -16,10 +14,16 @@ namespace :bundle do
   end
 end
 
+task :rubocop do
+  require 'rubocop/rake_task'
+  RuboCop::RakeTask.new
+end
+
 task :ci do
   tasks = []
   tasks << 'brakeman'
   tasks << 'bundle:audit'
+  tasks << 'rubocop'
 
   tasks.each do |task|
     Rake::Task[task].invoke

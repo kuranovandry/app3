@@ -1,16 +1,13 @@
 class MoviesController < ApplicationController
-
-  before_action :get_movie, except: %i(index create new)
+  before_action :prepare_movie, except: %i(index create new)
   before_action :authenticate_user!
-  before_action :get_categories, only: %i(edit new)
+  before_action :prepare_category, only: %i(edit new)
 
   def index
     movies = Movie.includes(:user).order('name').page(params[:page])
+    @movies = movies.decorate
     respond_to do |format|
-      format.html do
-        @movies = movies.decorate
-        render :index
-      end
+      format.html
       format.csv { send_data movies.to_csv_generator }
       format.atom do
         @movies = movies
@@ -63,10 +60,15 @@ class MoviesController < ApplicationController
   private
 
   def movie_params
-    params.require(:movie).permit(:name, :description, :release_date, :image, category_ids: [], locations_attributes: [ :id, :country, :city, :address, :zip_code, :latitude, :longitude ])
+    params.require(:movie).permit(:name,
+                                  :description,
+                                  :release_date,
+                                  :image,
+                                  category_ids: [],
+                                  locations_attributes: %i(id country city address zip_code latitude longitude))
   end
 
-  def get_movie
+  def prepare_movie
     @movie = Movie.find(params[:id])
   end
 
@@ -74,9 +76,7 @@ class MoviesController < ApplicationController
     @categories = Category.all
   end
 
-  def get_categories
+  def prepare_category
     @categories = Category.pluck(:name, :id)
   end
-
-
 end

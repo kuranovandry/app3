@@ -8,5 +8,5 @@
 
 Movie.find_each do |movie|
   time = Time.current
-  10.times{|i| movie.daily_statistics.create(sum: rand(1000..23000), date: time.ago(i.days)) }
+  10.times { |i| movie.daily_statistics.create(sum: rand(1000..23_000), date: time.ago(i.days)) }
 end

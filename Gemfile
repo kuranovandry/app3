@@ -36,18 +36,18 @@ gem 'gmaps4rails'
 
 gem 'paperclip', '~> 4.2'
 gem 'masonry-rails'
-#https://github.com/jnicklas/capybara
+# https://github.com/jnicklas/capybara
 gem 'capybara'
-#https://github.com/thoughtbot/capybara-webkit
+# https://github.com/thoughtbot/capybara-webkit
 gem 'capybara-webkit'
-#https://github.com/DatabaseCleaner/database_cleaner
+# https://github.com/DatabaseCleaner/database_cleaner
 gem 'database_cleaner'
 
-#https://github.com/spohlenz/tinymce-rails
+# https://github.com/spohlenz/tinymce-rails
 gem 'tinymce-rails'
 gem 'font-awesome-rails'
 gem 'brakeman'
-
+gem 'rubocop'
 
 group :development, :test do
   # gem 'byebug'
@@ -59,4 +59,3 @@ group :development, :test do
   gem 'faker'
   gem 'factory_girl'
 end
-
