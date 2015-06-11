@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
         @movies = movies.decorate
         render :index
       end
-      format.csv { render text: movies.to_csv_generator }
+      format.csv { send_data movies.to_csv_generator }
       format.atom do
         @movies = movies
         render action: 'index', layout: false
