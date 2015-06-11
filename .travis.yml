@@ -1,7 +1,12 @@
 language: ruby
+cache: bundler
 rvm:
   - "2.2.0-preview1"
 before_script:
+  - bundle exec rake ci
   - cp config/database.yml.travis config/database.yml
   - bundle exec rake db:create:all db:migrate db:migrate_db2
 script: xvfb-run bundle exec rspec spec
+
+cache:
+  - bundler

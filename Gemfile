@@ -48,8 +48,10 @@ gem 'tinymce-rails'
 gem 'font-awesome-rails'
 gem 'brakeman'
 
+
 group :development, :test do
   # gem 'byebug'
+  gem 'bundler-audit'
   gem 'shoulda-matchers'
   gem 'rspec-rails', '~> 3.0'
   gem 'web-console', '~> 2.0'
