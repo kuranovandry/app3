@@ -9,6 +9,8 @@ describe User do
     it { is_expected.to have_many(:credit_transactions) }
     it { is_expected.to have_many(:admin_transactions) }
     it { is_expected.to have_one(:address) }
+    it { is_expected.to have_many(:orders) }
+    it { is_expected.to have_one(:cart) }
   end
 
   describe 'validation' do
@@ -55,6 +57,18 @@ describe User do
 
     context 'has money' do
       it { expect(sponsor.payable?).to be_truthy }
+    end
+  end
+
+  describe '.purchase_cart' do
+    let!(:user) { create :user }
+    let(:movie) { create :movie, skip_tickets: false }
+
+    before { user.add_to_cart(movie) }
+
+    it 'moves items from cart to order and takes off credits' do
+      admin.add_money(user.id, 200, 'Money for purchase')
+      expect{ user.purchase_cart }.to change{ OrderItem.count }.by(1)
     end
   end
 

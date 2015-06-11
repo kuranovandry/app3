@@ -6,6 +6,11 @@ class Movie < ActiveRecord::Base
   has_many :uploads, dependent: :destroy
   has_many :daily_statistics, dependent: :destroy
   has_many :monthly_statistics, dependent: :destroy
+  has_many :tickets, dependent: :destroy
+
+  #------------------------------Callbacks---------------------------------
+  attr_writer :skip_tickets
+  after_create { create_tickets unless @skip_tickets }
 
   has_attached_file :image, styles: { medium: '300x300>', thumb: '100x100>' }, default_url: 'missing.jpg'
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
@@ -14,6 +19,14 @@ class Movie < ActiveRecord::Base
 
   paginates_per 10
 
+  #----------------------------Instance methods----------------------------
+  def create_tickets(price = 50, amount = 60)
+    tickets.create((1..amount).inject([]){|res, i| res << {place_number: i}}) do |t|
+      t.price = price
+    end
+  end
+
+  #----------------------------Class methods-------------------------------
   def self.to_csv_generator
     movies_fields = %w(id name description)
     CSV.generate do |csv|

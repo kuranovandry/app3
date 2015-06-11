@@ -14,6 +14,7 @@
               = @movie.user.full_name
           .col-md-8.text-right
             .btn-group
+              = link_to 'Add to cart', add_to_the_cart_movie_path(@movie), class: 'btn btn-info', method: :post
               = link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-info'
               = link_to 'Gallery', movie_uploads_path(@movie), class: 'btn btn-info'
               = link_to 'Monthly statistic', movie_monthly_statistics_path(@movie), class: 'btn btn-info'

@@ -1,21 +1,42 @@
-.panel.panel-default
-  .panel-body
-    .form-group
-      %strong First Name:
-      = @user.first_name
-    .form-group
-      %strong Last Name:
-      = @user.last_name
-    .form-group
-      %strong Email:
-      = @user.email
-    .form-group
-      %strong City:
-      = @user.address.city
-    .form-group
-      %strong Postal Code:
-      = @user.address.postal_code
-    .form-group
-      %strong address:
-      = @user.address.address
+%ul.nav.nav-tabs
+  %li.active
+    %a{'data-toggle' => 'tab', :href => '.profile'} Profile
+  %li
+    %a{'data-toggle' => 'tab', :href => '.tickets'} Tickets
+.tab-content
+  .panel.panel-default.profile.tab-pane.fade.in.active
+    .panel-body
+      .form-group
+        %strong First Name:
+        = @user.first_name
+      .form-group
+        %strong Last Name:
+        = @user.last_name
+      .form-group
+        %strong Email:
+        = @user.email
+      .form-group
+        %strong City:
+        = @user.address.city
+      .form-group
+        %strong Postal Code:
+        = @user.address.postal_code
+      .form-group
+        %strong address:
+        = @user.address.address
+  .tickets.tab-pane.fade
+    %h1 Tickets
+    %table.table.table-hover
+      %tr.info
+        %th Movie name
+        %th Price
+        %th Place number
+        %th
+      - @order_items.each do |order_item|
+        %tr{ id: "order_item-#{order_item.id}" }
+          %td= order_item.name
+          %td= number_to_currency order_item.price
+          %td= order_item.place_number
+          %td= link_to 'Print ticket', ticket_path(order_item.ticket, format: 'pdf'), class: 'btn btn-info', target: '_blank'
+
 = link_to 'Go to All Users', users_path,  class: 'btn btn-primary'

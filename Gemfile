@@ -39,10 +39,15 @@ gem 'capybara'
 gem 'capybara-webkit'
 #https://github.com/DatabaseCleaner/database_cleaner
 gem 'database_cleaner'
-
+#https://github.com/apotonick/cells
+gem 'cells', '~> 4.0.0'
+#https://github.com/trailblazer/cells-haml
+gem 'cells-haml'
 #https://github.com/spohlenz/tinymce-rails
 gem 'tinymce-rails'
 gem 'font-awesome-rails'
+gem 'prawn'
+gem 'prawn-table'
 
 group :development, :test do
   # gem 'byebug'

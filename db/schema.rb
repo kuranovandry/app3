@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20150604062844) do
+ActiveRecord::Schema.define(version: 20150604123249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +60,25 @@ ActiveRecord::Schema.define(version: 20150604062844) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "cart_items", force: :cascade do |t|
+    t.integer  "ticket_id"
+    t.integer  "quantity"
+    t.integer  "cart_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "cart_items", ["cart_id"], name: "index_cart_items_on_cart_id", using: :btree
+  add_index "cart_items", ["ticket_id"], name: "index_cart_items_on_ticket_id", using: :btree
+
+  create_table "carts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "carts", ["user_id"], name: "index_carts_on_user_id", using: :btree
+
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
@@ -92,20 +110,6 @@ ActiveRecord::Schema.define(version: 20150604062844) do
   add_index "daily_statistics", ["movie_id", "date"], name: "index_daily_statistics_on_movie_id_and_date", unique: true, using: :btree
   add_index "daily_statistics", ["movie_id"], name: "index_daily_statistics_on_movie_id", using: :btree
 
-  create_table "locations", force: :cascade do |t|
-    t.string   "country"
-    t.string   "city"
-    t.string   "address"
-    t.integer  "zip_code"
-    t.float    "longitude"
-    t.float    "latitude"
-    t.integer  "movie_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "locations", ["movie_id"], name: "index_locations_on_movie_id", using: :btree
-
   create_table "movies", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -121,6 +125,27 @@ ActiveRecord::Schema.define(version: 20150604062844) do
 
   add_index "movies", ["user_id"], name: "index_movies_on_user_id", using: :btree
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "order_id"
+    t.decimal  "price",          precision: 8, scale: 2
+    t.integer  "ticket_id"
+    t.integer  "transaction_id"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
+  add_index "order_items", ["ticket_id"], name: "index_order_items_on_ticket_id", using: :btree
+  add_index "order_items", ["transaction_id"], name: "index_order_items_on_transaction_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -132,6 +157,18 @@ ActiveRecord::Schema.define(version: 20150604062844) do
   end
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
+
+  create_table "tickets", force: :cascade do |t|
+    t.decimal  "price",          precision: 8, scale: 2
+    t.integer  "movie_id"
+    t.integer  "place_number"
+    t.boolean  "bought",                                 default: false
+    t.integer  "reserved_by_id"
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+  end
+
+  add_index "tickets", ["movie_id"], name: "index_tickets_on_movie_id", using: :btree
 
   create_table "transactions", force: :cascade do |t|
     t.integer  "creditor_id"
