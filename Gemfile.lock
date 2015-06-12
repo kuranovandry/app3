@@ -87,6 +87,12 @@ GEM
     capybara-webkit (1.5.1)
       capybara (>= 2.3.0, < 2.5.0)
       json
+    cells (4.0.0)
+      tilt (>= 1.4, < 3)
+      uber (~> 0.0.9)
+    cells-haml (0.0.6)
+      cells (~> 4.0.0.beta6)
+      haml (~> 4.0)
     celluloid (0.16.0)
       timers (~> 4.0.0)
     chartkick (1.3.2)
@@ -230,9 +236,14 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    pdf-core (0.5.1)
     pg (0.18.1)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
+    prawn (2.0.1)
+      pdf-core (~> 0.5.1)
+      ttfunk (~> 1.4.0)
+    prawn-table (0.2.1)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -357,8 +368,10 @@ GEM
       railties (>= 3.1.1)
     travis-lint (2.0.0)
       json
+    ttfunk (1.4.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    uber (0.0.13)
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -384,6 +397,8 @@ DEPENDENCIES
   bundler-audit
   capybara
   capybara-webkit
+  cells (~> 4.0.0)
+  cells-haml
   chartkick
   coffee-rails (~> 4.1.0)
   database_cleaner
@@ -408,6 +423,8 @@ DEPENDENCIES
   omniauth-linkedin-oauth2
   paperclip (~> 4.2)
   pg
+  prawn
+  prawn-table
   pry
   puma
   rails (= 4.2.1)

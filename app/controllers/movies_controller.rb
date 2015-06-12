@@ -33,7 +33,7 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @movie = current_user.movies.create(movie_params)
+    @movie = current_user.movies.build(movie_params)
     if @movie.save
       flash[:success] = t('movie.successful_create')
       redirect_to movies_path
@@ -60,6 +60,12 @@ class MoviesController < ApplicationController
     end
   end
 
+  def add_to_the_cart
+    current_user.add_to_cart(@movie, params)
+    flash[:success] = t('cart_item.successful_create')
+    redirect_to movies_path
+  end
+
   private
 
   def movie_params
@@ -77,6 +83,4 @@ class MoviesController < ApplicationController
   def get_categories
     @categories = Category.pluck(:name, :id)
   end
-
-
 end
