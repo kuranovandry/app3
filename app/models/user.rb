@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
   has_many :debit_transactions, foreign_key: :debitor_id, class_name: 'Transaction', dependent: :destroy
   has_many :credit_transactions, foreign_key: :creditor_id, class_name: 'Transaction', dependent: :destroy
   has_many :admin_transactions, foreign_key: :user_id, class_name: 'Transaction', dependent: :destroy
+  has_many :orders, dependent: :destroy
+  has_one :cart, dependent: :destroy
+  has_many :order_items, through: :orders
+  has_many :reserved_tickets, class_name: 'Ticket', foreign_key: :reserved_by_id, dependent: :nullify
   accepts_nested_attributes_for :address
 
   scope :with_project, -> { joins(:projects).distinct }
@@ -46,6 +50,36 @@ class User < ActiveRecord::Base
 
   def add_money(debitor_id, amount, memo)
     admin_transactions.create(debitor_id: debitor_id, amount: amount, memo: memo)
+  end
+
+  def can_afford?
+    balance - cart.total_price >= 0
+  end
+
+  def purchase_cart
+    order = orders.create
+    transaction do
+      cart.cart_items.includes(:ticket).find_each do |item|
+        ticket = item.ticket
+        if reserved_tickets.include?(ticket)
+          ticket.update_attribute(:bought, true)
+          transaction = transfer_money(ticket.movie.user_id, ticket.price)
+          order.order_items.create(order: order, price: ticket.price, ticket: ticket, transaction_id: transaction.id)
+          item.destroy
+        end
+      end
+    end
+    reserved_tickets.update_all(reserved_by_id: nil)
+  end
+
+  def add_to_cart(movie, params = {})
+    create_cart unless cart
+    transaction do
+      ticket = movie.tickets.available.sample
+      reserved_tickets << ticket
+      quantity = params[:quantity] || 1
+      cart.cart_items.create(ticket: ticket, quantity: quantity)
+    end
   end
   #-----------Class methods------------
   def self.filter(method)

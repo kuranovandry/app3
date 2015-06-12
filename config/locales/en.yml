@@ -33,3 +33,14 @@ en:
     successful_create: 'Movie was successfully created.'
     successful_destroy: 'Movie was successfully destroyed.'
     error_destroy: 'You can not delete this movie'
+  cart_item:
+    successful_create: 'You have successfully added ticket to your cart.'
+    successful_destroy: 'Item was successfully destroyed.'
+    error_destroy: 'Item was not destroyed.'
+  order:
+    successful_purchase: 'The tickets are successfully bought.'
+    purchase_error: "You don't have enough money."
+  cart:
+    successful_destroy: 'Item has been successfully destroyed.'
+    error_destroy: 'Item has not been destroyed.'
+    empty: 'Your cart is empty.'
