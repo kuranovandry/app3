@@ -14,6 +14,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @order_items = current_user.order_items.includes(:ticket)
+  end
+
   def welcome
     UserMailer.delay.welcome(@user)
     redirect_to users_path
