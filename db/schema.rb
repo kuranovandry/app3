@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150604123249) do
+ActiveRecord::Schema.define(version: 20150615094424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(version: 20150604123249) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "duration"
   end
 
   add_index "movies", ["user_id"], name: "index_movies_on_user_id", using: :btree
@@ -178,6 +179,8 @@ ActiveRecord::Schema.define(version: 20150604123249) do
     t.integer  "place_number"
     t.boolean  "bought",                                 default: false
     t.integer  "reserved_by_id"
+    t.time     "session_time"
+    t.date     "session_date"
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
   end

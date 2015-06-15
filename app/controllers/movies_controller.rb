@@ -69,7 +69,9 @@ class MoviesController < ApplicationController
   private
 
   def movie_params
-    params.require(:movie).permit(:name, :description, :release_date, :image, category_ids: [], locations_attributes: [ :id, :country, :city, :address, :zip_code, :latitude, :longitude ])
+    date = params[:movie][:release_date]
+    params[:movie][:release_date] = Date.strptime(date, '%m/%d/%Y') unless date.empty?
+    params.require(:movie).permit(:name, :description, :release_date, :image, :duration, category_ids: [], locations_attributes: [ :id, :country, :city, :address, :zip_code, :latitude, :longitude ])
   end
 
   def get_movie

@@ -22,6 +22,7 @@ class Movie < ActiveRecord::Base
   #------------------------------Validations-------------------------------
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
   validates :description, :name, presence: true
+  validates_numericality_of :duration, greater_than_or_equal_to: 40, less_than_or_equal_to: 240
 
   #------------------------------Kaminari----------------------------------
   paginates_per 10

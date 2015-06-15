@@ -9,4 +9,8 @@ class TicketsController < ApplicationController
       end
     end
   end
+
+  def index
+    
+  end
 end

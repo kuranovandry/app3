@@ -1,12 +1,7 @@
 #main.col-xs-12
   %h1 Gallery
   .col-md-8.col-md-offset-2
-    %ul#tabs.nav.nav-tabs
-      %li= link_to @movie.name, @movie
-      %li= link_to 'Edit', edit_movie_path(@movie)
-      %li.active= link_to 'Gallery', movie_uploads_path(@movie)
-      %li= link_to 'Monthly statistic', movie_monthly_statistics_path(@movie)
-      %li= link_to 'Daily statistic', movie_daily_statistics_path(@movie)
+    = render 'movies/tabs'
   %input#fileupload{ 'data-url' => movie_uploads_path(params[:movie_id]), multiple: 'multiple', name: 'file', type: 'file'}
   .file_uploader
   #container.row

@@ -19,6 +19,6 @@ Rails.application.routes.draw do
   resource :cart, only: %i(show destroy)
   resources :orders, only: :create
   resources :categories
-  resources :tickets, only: :show
+  resources :tickets, only: %i(show index)
   root to: 'home#index'
 end
