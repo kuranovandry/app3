@@ -26,8 +26,9 @@ class User < ActiveRecord::Base
 
   scope :with_project, -> { joins(:projects).distinct }
   scope :without_project, lambda {
-                          joins('LEFT JOIN projects on (users.id = projects.user_id)')
-                            .where('projects.user_id IS NULL') }
+    joins('LEFT JOIN projects on (users.id = projects.user_id)')
+      .where('projects.user_id IS NULL')
+  }
 
   #-----------Instance methods------------
   def full_name
@@ -89,17 +90,17 @@ class User < ActiveRecord::Base
   end
 
   def self.connections(auth, _signed_in_resource = nil)
-    User.where(provider: auth.provider, uid: auth.uid).first ||
-      User.where(email: auth.info.email).first ||
+    User.find_by(provider: auth.provider, uid: auth.uid) ||
+      User.find_by(email: auth.info.email) ||
       User.create(first_name: auth.info.first_name, last_name: auth.info.last_name, provider: auth.provider,
-                    uid: auth.uid, email: auth.info.email, password: Devise.friendly_token[0, 20])
+                  uid: auth.uid, email: auth.info.email, password: Devise.friendly_token[0, 20])
   end
 
   def self.to_csv_generator
     user_fields = %w(id email first_name last_name)
     CSV.generate do |csv|
       csv << user_fields
-      all.each do |user|
+      find_each do |user|
         csv << user.attributes.values_at(*user_fields)
       end
     end

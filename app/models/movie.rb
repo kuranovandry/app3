@@ -1,5 +1,4 @@
 class Movie < ActiveRecord::Base
-
   #------------------------------Associations---------------------------------
   belongs_to :user
 
@@ -26,7 +25,7 @@ class Movie < ActiveRecord::Base
 
   #----------------------------Instance methods----------------------------
   def create_tickets(price = 50, amount = 60)
-    tickets.create((1..amount).inject([]){|res, i| res << {place_number: i}}) do |t|
+    tickets.create((1..amount).inject([]) { |a, e| a << { place_number: e } }) do |t|
       t.price = price
     end
   end
@@ -36,7 +35,7 @@ class Movie < ActiveRecord::Base
     movies_fields = %w(id name description)
     CSV.generate do |csv|
       csv << movies_fields
-      all.each do |movie|
+      find_each do |movie|
         csv << movie.attributes.values_at(*movies_fields)
       end
     end

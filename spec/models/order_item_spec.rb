@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe OrderItem, type: :model do
   describe 'associations' do
-    it { is_expected.to belong_to(:order)}
-    it { is_expected.to belong_to(:ticket)}
+    it { is_expected.to belong_to(:order) }
+    it { is_expected.to belong_to(:ticket) }
     it { is_expected.to belong_to(:order_transaction) }
   end
 
@@ -14,7 +14,7 @@ RSpec.describe OrderItem, type: :model do
 
     it { is_expected.to validate_presence_of(:order) }
     it { is_expected.to validate_presence_of(:ticket) }
-    it { is_expected.to validate_numericality_of(:price).is_greater_than(0) }
+    it { is_expected.to validate_numericality_of(:price) }
     it { is_expected.to validate_presence_of(:transaction_id) }
   end
 end

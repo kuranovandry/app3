@@ -6,6 +6,6 @@ class OrderItem < ActiveRecord::Base
 
   delegate :name, :place_number, to: :ticket
   #-----------------------Validations---------------------------
-  validates_presence_of :order, :ticket, :price, :transaction_id
-  validates_numericality_of :price, greater_than: 0
+  validates :order, :ticket, :price, :transaction_id, presence: true
+  validates :price, numericality: true
 end

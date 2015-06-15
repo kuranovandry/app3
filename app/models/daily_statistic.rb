@@ -1,6 +1,6 @@
 class DailyStatistic < ActiveRecord::Base
   belongs_to :movie
-  validates_presence_of :movie_id
+  validates :movie_id, presence: true
   validates :movie_id, uniqueness: { scope: :date }
   #----------Class methods------------
   def self.monthly_statistic(date = Time.current.to_date)

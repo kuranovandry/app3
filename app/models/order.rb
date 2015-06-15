@@ -3,5 +3,5 @@ class Order < ActiveRecord::Base
   belongs_to :user
   has_many :order_items, dependent: :destroy
   #-----------------------Validations----------------------------
-  validates_presence_of :user
+  validates :user, presence: true
 end

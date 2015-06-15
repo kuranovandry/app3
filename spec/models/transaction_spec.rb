@@ -19,7 +19,7 @@ RSpec.describe Transaction, type: :model do
 
     it { is_expected.to validate_presence_of(:debitor_id) }
     it { is_expected.to validate_presence_of(:amount) }
-    it { is_expected.to validate_numericality_of(:amount).is_greater_than(0) }
+    it { is_expected.to validate_numericality_of(:amount) }
 
     context 'if creditor is present' do
       let(:transaction_with_sponsor) do

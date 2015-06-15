@@ -1,6 +1,5 @@
 class MoviesController < ApplicationController
   before_action :prepare_movie, except: %i(index create new)
-  before_action :authenticate_user!
   before_action :prepare_category, only: %i(edit new)
 
   def index

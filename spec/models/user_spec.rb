@@ -68,7 +68,7 @@ describe User do
 
     it 'moves items from cart to order and takes off credits' do
       admin.add_money(user.id, 200, 'Money for purchase')
-      expect{ user.purchase_cart }.to change{ OrderItem.count }.by(1)
+      expect { user.purchase_cart }.to change { OrderItem.count }.by(1)
     end
   end
 end

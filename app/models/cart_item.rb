@@ -5,8 +5,8 @@ class CartItem < ActiveRecord::Base
 
   delegate :name, :price, to: :ticket
   #-----------------------Validations---------------------------
-  validates_presence_of :cart, :ticket
-  validates_numericality_of :quantity, greater_than_or_equal_to: 1, only_integer: true
+  validates :cart, :ticket, presence: true
+  validates :quantity, numericality: true
   #-------------------------Instance methods--------------------
   def total
     quantity * ticket.price
