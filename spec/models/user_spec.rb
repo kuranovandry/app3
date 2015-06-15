@@ -31,13 +31,13 @@ describe User do
   let(:memo) {  Faker::Company.catch_phrase }
 
   describe '.add_money' do
-    it { expect{ admin.add_money(sponsor.id, money_amount, memo) }.to change{ sponsor.balance }.by(money_amount) }
+    it { expect { admin.add_money(sponsor.id, money_amount, memo) }.to change { sponsor.balance }.by(money_amount) }
   end
 
   describe '.transfer_money' do
     it 'transfers money to recipient' do
       admin.add_money(sponsor.id, money_amount, memo)
-      expect{ sponsor.transfer_money(recipient.id, money_amount) }.to change{ recipient.balance }.by(money_amount)
+      expect { sponsor.transfer_money(recipient.id, money_amount) }.to change { recipient.balance }.by(money_amount)
     end
   end
 
@@ -68,8 +68,7 @@ describe User do
 
     it 'moves items from cart to order and takes off credits' do
       admin.add_money(user.id, 200, 'Money for purchase')
-      expect{ user.purchase_cart }.to change{ OrderItem.count }.by(1)
+      expect { user.purchase_cart }.to change { OrderItem.count }.by(1)
     end
   end
-
 end

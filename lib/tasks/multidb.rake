@@ -32,5 +32,4 @@ namespace :db do
       load("#{Rails.root}/db/db2_schema.rb")
     end
   end
-
 end

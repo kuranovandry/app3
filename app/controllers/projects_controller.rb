@@ -1,6 +1,5 @@
 class ProjectsController < ApplicationController
-
-  before_action :get_project, except: [:index, :show, :create, :new]
+  before_action :prepare_project, except: [:index, :show, :create, :new]
 
   def index
     @projects = Project.order('name').page(params[:page]).decorate
@@ -13,7 +12,7 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find params[:id]
   end
-  
+
   def create
     @project = current_user.projects.create(project_params)
     if @project.save
@@ -45,11 +44,13 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:name, :description, :end_date, :start_date)
+    params.require(:project).permit(:name,
+                                    :description,
+                                    :end_date,
+                                    :start_date)
   end
 
-  def get_project
+  def prepare_project
     @project = current_user.projects.find(params[:id])
   end
-
 end

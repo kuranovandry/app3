@@ -2,8 +2,7 @@ class MonthlyStatistic < ActiveRecord::Base
   establish_connection "db2_#{Rails.env}".to_sym
   #----------Associations------------
   belongs_to :movie
-  validates_presence_of :movie_id
-  validates_presence_of :date
+  validates :movie_id, :date, presence: true
   validate :month_unique?, unless: proc { |object| object.date.nil? && object.movie_id.nil? }
 
   private

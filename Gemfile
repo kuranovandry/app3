@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.1'
 
-
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -37,21 +36,21 @@ gem 'gmaps4rails'
 
 gem 'paperclip', '~> 4.2'
 gem 'masonry-rails'
-#https://github.com/jnicklas/capybara
+# https://github.com/jnicklas/capybara
 gem 'capybara'
-#https://github.com/thoughtbot/capybara-webkit
+# https://github.com/thoughtbot/capybara-webkit
 gem 'capybara-webkit'
-#https://github.com/DatabaseCleaner/database_cleaner
+# https://github.com/DatabaseCleaner/database_cleaner
 gem 'database_cleaner'
-#https://github.com/apotonick/cells
-gem 'cells', '~> 4.0.0'
-#https://github.com/trailblazer/cells-haml
-gem 'cells-haml'
-#https://github.com/spohlenz/tinymce-rails
+# https://github.com/spohlenz/tinymce-rails
 gem 'tinymce-rails'
 gem 'font-awesome-rails'
-
 gem 'brakeman'
+gem 'rubocop'
+# https://github.com/apotonick/cells
+gem 'cells', '~> 4.0.0'
+# https://github.com/trailblazer/cells-haml
+gem 'cells-haml'
 gem 'prawn'
 gem 'prawn-table'
 
@@ -65,4 +64,3 @@ group :development, :test do
   gem 'faker'
   gem 'factory_girl'
 end
-

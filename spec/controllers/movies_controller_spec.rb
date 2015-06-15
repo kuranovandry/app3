@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe MoviesController, type: :controller do
   let!(:user) { create(:user) }
-  let!(:movie) { create(:movie, user: user)}
-
+  let!(:movie) { create(:movie, user: user) }
 
   describe 'GET #index' do
     context 'anonymous user' do
@@ -36,29 +35,29 @@ RSpec.describe MoviesController, type: :controller do
     end
   end
 
-  describe "DELETE #destroy" do
+  describe 'DELETE #destroy' do
     before :each do
       sign_in :user, user
     end
 
     context 'when user is movie owner' do
       it 'removes movie' do
-        expect {
+        expect do
           delete :destroy, id: movie.id
-        }.to change { Movie.count }.by(-1)
+        end.to change { Movie.count }.by(-1)
       end
     end
   end
 
-  describe "PUT #update" do
+  describe 'PUT #update' do
     before :each do
       sign_in :user, user
     end
 
     let(:attr) { { name: 'new name' } }
 
-    context  'when user is movie owner' do
-      before (:each) do
+    context 'when user is movie owner' do
+      before :each do
         put :update, id: movie.id, movie: attr
         movie.reload
       end

@@ -4,8 +4,7 @@ class ApplicationDecorator < Draper::Decorator
   delegate_all
 
   def error_message(field)
-    if object.errors[field].any?
-      content_tag(:div, object.errors.full_messages_for(field).join(', '), class: 'field_with_errors')
-    end
+    return unless object.errors[field].any? content_tag(:div, object.errors.full_messages_for(field).join(', '),
+                                                        class: 'field_with_errors')
   end
 end

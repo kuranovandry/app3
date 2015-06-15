@@ -1,6 +1,6 @@
 module ApplicationHelper
   def generate_hash_for_statistic(object)
-    object.inject({}){|result, current| result.merge({current.date => current.sum})}
+    object.inject({}) { |a, e| a.merge(e.date => e.sum) }
   end
 
   def errors_output
@@ -9,7 +9,7 @@ module ApplicationHelper
         content_tag :div, class: "alert alert-dismissable alert-#{name}" do
           content_tag(:span, '&times;'.html_safe, class: :close, 'data-dismiss' => 'alert') + msg
         end
-      end.join().html_safe
+      end.join.html_safe
     end
   end
 
@@ -19,6 +19,6 @@ module ApplicationHelper
     fields = f.fields_for(association, new_object, child_index: id) do |builder|
       render(association.to_s.singularize, f: builder)
     end
-    link_to(name, '#', class: 'add_fields', data: {id: id, fields: fields.gsub('\n', '')})
+    link_to(name, '#', class: 'add_fields', data: { id: id, fields: fields.gsub('\n', '') })
   end
 end

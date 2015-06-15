@@ -15,8 +15,8 @@ RSpec.describe Ticket, type: :model do
     it { is_expected.to validate_presence_of(:movie) }
     it { is_expected.to validate_presence_of(:price) }
     it { is_expected.to validate_presence_of(:place_number) }
-    it { is_expected.to validate_numericality_of(:place_number).is_greater_than(0).only_integer }
-    it { is_expected.to validate_numericality_of(:price).is_greater_than(0) }
+    it { is_expected.to validate_numericality_of(:place_number) }
+    it { is_expected.to validate_numericality_of(:price) }
     it { is_expected.to validate_uniqueness_of(:place_number) }
   end
 

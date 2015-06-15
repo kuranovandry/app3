@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'the signup process', js: true, type: :feature do
-
   it 'signs me in' do
     visit new_user_registration_path
 
@@ -35,5 +34,4 @@ describe 'the signup process', js: true, type: :feature do
 
     expect(page).to have_content "First name can't be blank"
   end
-
 end

@@ -6,16 +6,17 @@ class Transaction < ActiveRecord::Base
   has_one :order_item, dependent: :destroy
 
   #---------------------Callbacks-------------------------
-  after_create { creditor.update_balance(creditor.balance) if creditor}
+  after_create { creditor.update_balance(creditor.balance) if creditor }
   after_create { debitor.update_balance(debitor.balance) }
 
   #---------------------Validations-----------------------
-  validates_presence_of :debitor_id, :amount
-  validates_numericality_of :amount, greater_than: 0
-  validates_presence_of :user_id, :memo, if: 'creditor_id.nil?'
+  validates :debitor_id, :amount, presence: true
+  validates :amount, numericality: true
+  validates :user_id, :memo, if: 'creditor_id.nil?', presence: true
   validate :can_afford?, :not_equal?, unless: 'creditor_id.nil?'
 
   #---------------------Instance methods------------------
+
   private
 
   def can_afford?
