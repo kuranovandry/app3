@@ -18,7 +18,11 @@ class Movie < ActiveRecord::Base
 
   #------------------------------Paperclip---------------------------------
   has_attached_file :image, styles: { medium: '300x300>', thumb: '100x100>' }, default_url: 'missing.jpg'
-  validates_attachment_content_type :image, content_type: %r{/\Aimage\/.*\Z/}
+
+  #------------------------------Validations-------------------------------
+  validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
+  validates :description, :name, presence: true
+  validates :duration, numericality: { greater_than_or_equal_to: 40, less_than_or_equal_to: 240 }
 
   #------------------------------Kaminari----------------------------------
   paginates_per 10

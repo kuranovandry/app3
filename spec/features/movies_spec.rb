@@ -19,6 +19,8 @@ feature 'Movies page', js: true, type: :feature do
   # Given there is a path for image uploading
   given(:test_image_path) { File.absolute_path('./spec/fixtures/images/test_image.jpeg') }
 
+  given(:release_date) { movie.release_date.strftime('%m/%d/%Y') }
+
   # When I visit movies page
   before :each do
     visit movie_path(movies.first.id)
@@ -55,7 +57,6 @@ feature 'Movies page', js: true, type: :feature do
     end
 
     click_button 'Update Movie'
-
     # Then I should see updated movie on the movies page
     expect(page).to have_content(movie.name)
   end
@@ -98,10 +99,14 @@ feature 'Movies page', js: true, type: :feature do
 end
 
 def fulfill_movies_form
+  click_link 'Add Location'
+
   fill_in 'Name', with: movie.name
+  fill_in 'Release date', with: release_date
+  fill_in 'Duration', with: movie.duration
+
   within_frame('movie_description_ifr') do
     editor = page.find_by_id('tinymce')
     editor.set movie.description
   end
-  fill_in 'Release date', with: movie.release_date
 end

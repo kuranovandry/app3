@@ -6,6 +6,7 @@ class CreateTickets < ActiveRecord::Migration
       t.integer :place_number
       t.boolean :bought, default: false
       t.belongs_to :reserved_by
+      t.date :session_date
       t.timestamps null: false
     end
   end

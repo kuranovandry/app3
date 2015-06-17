@@ -16,7 +16,7 @@ class MoviesController < ApplicationController
   end
 
   def new
-    @movie = Movie.new
+    @movie = Movie.new.decorate
     @movie.locations.build
   end
 
@@ -62,13 +62,20 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
+  def edit
+    @movie = @movie.decorate
+  end
+
   private
 
   def movie_params
+    date = params[:movie][:release_date]
+    params[:movie][:release_date] = Date.strptime(date, '%m/%d/%Y') if date && !date.empty?
     params.require(:movie).permit(:name,
                                   :description,
                                   :release_date,
                                   :image,
+                                  :duration,
                                   category_ids: [],
                                   locations_attributes: %i(id country city address zip_code latitude longitude))
   end
