@@ -11,18 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_150_519_125_157) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+ActiveRecord::Schema.define(version: 20150519125157) do
 
-  create_table 'monthly_statistics', force: :cascade do |t|
-    t.date 'date'
-    t.decimal 'sum'
-    t.integer 'movie_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "monthly_statistics", force: :cascade do |t|
+    t.date     "date"
+    t.decimal  "sum"
+    t.integer  "movie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index 'monthly_statistics', %w(movie_id date), name: 'index_monthly_statistics_on_movie_id_and_date', using: :btree
-  add_index 'monthly_statistics', ['movie_id'], name: 'index_monthly_statistics_on_movie_id', using: :btree
+  add_index "monthly_statistics", ["movie_id", "date"], name: "index_monthly_statistics_on_movie_id_and_date", using: :btree
+  add_index "monthly_statistics", ["movie_id"], name: "index_monthly_statistics_on_movie_id", using: :btree
+
 end

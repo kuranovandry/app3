@@ -1,12 +1,7 @@
 #main-container.container
   #movie_show.row
     .col-md-8.col-md-offset-2
-      %ul.nav.nav-tabs
-        %li.active= link_to @movie.name, @movie
-        %li= link_to 'Edit', edit_movie_path(@movie)
-        %li= link_to 'Gallery', movie_uploads_path(@movie)
-        %li= link_to 'Monthly statistic', movie_monthly_statistics_path(@movie)
-        %li= link_to 'Daily statistic', movie_daily_statistics_path(@movie)
+      = render 'movies/tabs'
       .panel.panel-default
         .panel-heading.movie_image
           = image_tag @movie.image.url

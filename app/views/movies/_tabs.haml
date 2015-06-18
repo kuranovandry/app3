@@ -1,0 +1,13 @@
+%ul.nav.nav-tabs
+  %li{ class: "#{'active' if params[:controller] == 'movies' && params[:action] == 'show'}" }
+    = link_to @movie.name, @movie
+  %li{ class: "#{'active' if params[:controller] == 'movies' && params[:action] == 'edit'}" }
+    = link_to 'Edit', edit_movie_path(@movie)
+  %li{ class: "#{'active' if params[:controller] == 'uploads' && params[:action] == 'index'}" }
+    = link_to 'Gallery', movie_uploads_path(@movie)
+  %li
+    = link_to 'Monthly statistic', movie_monthly_statistics_path(@movie)
+  %li
+    = link_to 'Daily statistic', movie_daily_statistics_path(@movie)
+  %li
+    = link_to 'Choose ticket', '#'

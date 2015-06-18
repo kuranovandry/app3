@@ -8,10 +8,12 @@ class Ticket < ActiveRecord::Base
   delegate :name, to: :movie, allow_nil: true
   #----------------------------Scopes--------------------------------------
   scope :available, -> { where(bought: false, reserved_by_id: nil) }
+  scope :specific_session, -> (time, date) { where(session_time: time, session_date: date) }
 
   #-----------------------Validations---------------------------
   validates :movie, :price, :place_number, presence: true
-  validates :price, numericality: true
-  validates :place_number, numericality: true
-  validates :place_number, uniqueness: true
+  validates :price, numericality: { greater_than: 0 }
+  validates :place_number,
+            numericality: { greater_than: 0, only_integer: true },
+            uniqueness: { scope: %i(movie_id session_date) }
 end

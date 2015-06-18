@@ -59,7 +59,8 @@
       event.preventDefault()
 
   datePicker: ->
-    $('.datepicker').datepicker()
+    $('.datepicker').datepicker
+      format: 'mm/dd/yyyy'
 
   moviesImages: ->
     $('#movies_gallery').imagesLoaded ->
