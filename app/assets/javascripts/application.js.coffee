@@ -22,6 +22,8 @@
 #= require chartkick
 #= require underscore
 #= require gmaps/google
+#= require moment
+#= require fullcalendar
 
 @App3 = {
   init: (a) ->
@@ -31,6 +33,7 @@
     @moviesImages() if a.moviesImages
     @registrationPopup() if a.registrationPopup
     @uploadsGallery() if a.uploadsGallery
+    @moviesCalendar() if a.moviesCalendar
     return
 
   moviesMap: ->
@@ -113,4 +116,28 @@
       url = $('.pagination .next a').prop('href')
       if url && $(window).scrollTop() > $(document).height() - $(window).height() - 50
         $.getScript(url)
+
+  moviesCalendar: ->
+    $('#calendar').fullCalendar
+      header:
+        left: 'prev,next today'
+        center: 'title'
+        right: 'month,agendaWeek,agendaDay'
+      defaultDate: '2015-02-12'
+      selectable: true
+      selectHelper: true
+      select: (start, end) ->
+        title = prompt('Event Title:')
+        eventData = undefined
+        if title
+          eventData =
+            title: title
+            start: start
+            end: end
+          $('#calendar').fullCalendar 'renderEvent', eventData, true
+        $('#calendar').fullCalendar 'unselect'
+        return
+      editable: true
+      eventLimit: true
+    return
 }
