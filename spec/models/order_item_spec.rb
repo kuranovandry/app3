@@ -14,7 +14,9 @@ RSpec.describe OrderItem, type: :model do
 
     it { is_expected.to validate_presence_of(:order) }
     it { is_expected.to validate_presence_of(:ticket) }
-    it { is_expected.to validate_numericality_of(:price) }
     it { is_expected.to validate_presence_of(:transaction_id) }
+
+    it { is_expected.to validate_numericality_of(:price) }
   end
+
 end

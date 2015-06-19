@@ -72,13 +72,12 @@ class User < ActiveRecord::Base
         end
       end
     end
-    reserved_tickets.update_all(reserved_by_id: nil)
+    reserved_tickets.destroy_all_reservations
   end
 
-  def add_to_cart(movie, params = {})
+  def add_to_cart(ticket, params = {})
     create_cart unless cart
     transaction do
-      ticket = movie.tickets.available.sample
       reserved_tickets << ticket
       quantity = params[:quantity] || 1
       cart.cart_items.create(ticket: ticket, quantity: quantity)

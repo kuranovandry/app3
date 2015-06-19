@@ -16,4 +16,14 @@ class Ticket < ActiveRecord::Base
   validates :place_number,
             numericality: { greater_than: 0, only_integer: true },
             uniqueness: { scope: %i(movie_id session_date) }
+
+  #-----------------------Instance methods----------------------
+  def destroy_reservation
+    update_attribute(:reserved_by_id, nil)
+  end
+
+  #-----------------------Class methods--------------------------
+  def self.destroy_all_reservations
+    update_all(reserved_by_id: nil)
+  end
 end

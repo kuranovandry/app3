@@ -44,6 +44,7 @@
       markers = handler.addMarkers markers
       handler.bounds.extendWith markers
       handler.fitMapToBounds()
+
   movieEdit: ->
     tinyMCE.init selector: 'textarea.tinymce'
 

@@ -3,6 +3,9 @@ class Cart < ActiveRecord::Base
   has_many :cart_items, dependent: :destroy
   belongs_to :user
 
+  #-----------------------Callbacks-----------------------------
+  before_destroy { user.reserved_tickets.destroy_all_reservations }
+
   #-----------------------Instance methods----------------------
   def quantity
     cart_items.sum(:quantity)

@@ -2,8 +2,9 @@ class Movie < ActiveRecord::Base
   #------------------------------Associations---------------------------------
   belongs_to :user
 
-  has_many :categories_movies, dependent: :destroy
   has_many :categories, through: :categories_movies
+
+  has_many :categories_movies, dependent: :destroy
   has_many :uploads, dependent: :destroy
   has_many :daily_statistics, dependent: :destroy
   has_many :monthly_statistics, dependent: :destroy
@@ -36,7 +37,7 @@ class Movie < ActiveRecord::Base
 
   #----------------------------Class methods-------------------------------
   def self.to_csv_generator
-    movies_fields = %w(id name description)
+    movies_fields = %w(name description)
     CSV.generate do |csv|
       csv << movies_fields
       find_each do |movie|

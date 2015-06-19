@@ -1,24 +1,25 @@
-#main.col-xs-12
-  - unless @cart.cart_items.empty?
-    %h1 Cart
-    %table.table.table-hover
-      %tr.info
-        %th Item
-        %th Quantity
-        %th Price for one item
-        %th Sum
-      - @cart.cart_items.each do |item|
-        %tr{ id: "item-#{item.id}" }
-          %td= item.name
-          %td= item.quantity
-          %td= number_to_currency(item.ticket.price)
+.row
+  #main.col-xs-9.col-xs-offset-2
+    - unless show_cart?(@cart)
+      %h1 Cart
+      %table.table.table-hover
+        %tr.info
+          %th Item
+          %th Quantity
+          %th Price for one item
+          %th Sum
+        - @cart.cart_items.each do |item|
+          %tr{ id: "item-#{item.id}" }
+            %td= item.name
+            %td= item.quantity
+            %td= number_to_currency(item.ticket.price)
+            %td
+              = number_to_currency(item.total)
+              = link_to 'Remove', cart_item_path(item), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+        %tr
           %td
-            = number_to_currency(item.total)
-            = link_to 'Remove', cart_item_path(item), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-      %tr
-        %td
-          = button_to 'Buy', orders_path, method: :post, class: 'btn btn-info'
-        %td
-          = link_to 'Clean cart', cart_path, method: :delete, class: 'btn btn-danger'
-  - else
-    %h1= t('cart.empty')
+            = button_to 'Buy', orders_path, method: :post, class: 'btn btn-info'
+          %td
+            = link_to 'Clean cart', cart_path, method: :delete, class: 'btn btn-danger'
+    - else
+      %h1= t('cart.empty')

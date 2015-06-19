@@ -1,0 +1,17 @@
+.row
+  .col-xs-7.col-xs-offset-2
+    %h1 Yuhu
+    %table.table.info
+      - @tickets.each_with_index do |ticket, index|
+        %td
+          = link_to ticket.place_number, add_to_cart_ticket_path(ticket), method: :post,
+            class: "btn btn-default #{'btn-info' if ticket.bought == true || ticket.reserved_by_id  }"
+        - if (index + 1) % 10 == 0
+          %tr
+    .row
+      .col-xs-3
+        .btn.btn-info
+        Bought or reserved places
+      .col-xs-3
+        .btn.btn-default
+        Available places

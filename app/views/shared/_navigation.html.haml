@@ -2,7 +2,7 @@
   .container
     .navbar-header
       - if user_signed_in?
-        = link_to image_tag('logo'), root_path, class: 'navbar-brand'
+        = link_to image_tag('logo.png'), root_path, class: 'navbar-brand'
         = link_to 'Users', users_path, class: 'navbar-brand'
         = link_to 'Projects', projects_path, class: 'navbar-brand'
         = link_to 'Movies', movies_path, class: 'navbar-brand'

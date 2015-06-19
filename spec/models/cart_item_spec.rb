@@ -13,5 +13,15 @@ RSpec.describe CartItem, type: :model do
 
     it { is_expected.to validate_presence_of(:cart) }
     it { is_expected.to validate_presence_of(:ticket) }
+    it { is_expected.to validate_numericality_of(:quantity) }
+  end
+
+  describe '.total' do
+    let!(:cart_item) { create :cart_item }
+    let(:sum) { cart_item.quantity * cart_item.price }
+
+    it 'calculates total price' do
+      expect(cart_item.total).to eq sum
+    end
   end
 end

@@ -16,13 +16,13 @@
                 = @movie.user.full_name
             .col-md-8.text-right
               .btn-group
-                = link_to 'Add to cart', add_to_the_cart_movie_path(@movie), class: 'btn btn-info', method: :post
                 = link_to 'Destroy', movie_path(@movie), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+
 - if @movie.locations.exists?
   #map.movie_map{data: { markers: raw(@markers.to_json)}}
-:javascript
-  $(function(){
-    App3.init({map: true});
-  });
+  :javascript
+    $(function(){
+      App3.init({map: true});
+    });
 
 

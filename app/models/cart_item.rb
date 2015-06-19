@@ -7,6 +7,10 @@ class CartItem < ActiveRecord::Base
   #-----------------------Validations---------------------------
   validates :cart, :ticket, presence: true
   validates :quantity, numericality: true
+
+  #-----------------------Callbacks-----------------------------
+  before_destroy { ticket.destroy_reservation }
+
   #-------------------------Instance methods--------------------
   def total
     quantity * ticket.price

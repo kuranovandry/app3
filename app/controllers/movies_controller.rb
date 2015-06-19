@@ -29,11 +29,12 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @movie = current_user.movies.build(movie_params)
-    if @movie.save
+    movie = current_user.movies.build(movie_params)
+    if movie.save
       flash[:success] = t('movie.successful_create')
       redirect_to movies_path
     else
+      @movie = movie.decorate
       render 'new'
     end
   end
@@ -56,16 +57,6 @@ class MoviesController < ApplicationController
     end
   end
 
-  def add_to_the_cart
-    current_user.add_to_cart(@movie, params)
-    flash[:success] = t('cart_item.successful_create')
-    redirect_to movies_path
-  end
-
-  def edit
-    @movie = @movie.decorate
-  end
-
   private
 
   def movie_params
@@ -81,7 +72,7 @@ class MoviesController < ApplicationController
   end
 
   def prepare_movie
-    @movie = Movie.find(params[:id])
+    @movie = Movie.find(params[:id]).decorate
   end
 
   def find_categories
