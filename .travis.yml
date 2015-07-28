@@ -1,9 +1,12 @@
 language: ruby
+sudo: false
 cache: bundler
 rvm:
   - "2.2.0-preview1"
 before_script:
-  - bundle exec rake ci
+  - bundle exec rubocop
+  - bundle exec brakeman
+  - bundle exec bundle-audit check
   - cp config/database.yml.travis config/database.yml
   - bundle exec rake db:create:all db:migrate db:migrate_db2
 script: xvfb-run bundle exec rspec spec

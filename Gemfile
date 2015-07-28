@@ -53,6 +53,7 @@ gem 'cells', '~> 4.0.0'
 gem 'cells-haml'
 gem 'prawn'
 gem 'prawn-table'
+gem 'fullcalendar-rails'
 
 group :development, :test do
   # gem 'byebug'
